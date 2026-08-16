@@ -1,58 +1,117 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🥖 Fersya Shop – Organic Elegance E-Commerce
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
+[![Filament](https://img.shields.io/badge/Filament-3.x-FDAE4B?style=for-the-badge&logo=laravel&logoColor=black)](https://filamentphp.com)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![License](https://img.shields.io/badge/License-MIT-blue.style=for-the-badge)](LICENSE)
 
-## About Laravel
+**Fersya Shop** adalah aplikasi e-commerce modern berpenerapan desain *Organic Elegance* yang dibangun khusus untuk toko bakery artisan, kopi organik, dan teh herbal. Menggabungkan estetika visual kelas atas dengan alur belanja yang ringkas, cepat, dan aman.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ✨ Fitur Utama
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🛍️ Sisi Pembeli (Storefront)
+- **Katalog Artisan & Filter Kategori**: Navigasi produk responsif untuk Roti Gandum, Kopi Organik, dan Teh Herbal.
+- **Varian Produk & Stok Real-Time**: Pemilihan ukuran/varian dengan stok terintegrasi dan validasi otomatis saat checkout.
+- **Keranjang Belanja Session**: Mengelola item belanja tanpa perlu login paksa (*guest checkout*).
+- **Pembayaran Barcode QRIS & Konfirmasi WhatsApp**: Mendukung scan QRIS (GoPay, OVO, Dana, ShopeePay, Bank Transfer) + tombol otomatis chat WA Admin (`081321686115`).
+- **Lacak & Cek Status Pesanan (`/cek-pesanan`)**: Pencarian instan riwayat pesanan menggunakan Nomor Pesanan (`FS-XXXXXXXX`) atau Nomor WhatsApp.
+- **Ulasan Produk Terverifikasi**: Pembeli yang sudah menyelesaikan pembayaran dapat mengirimkan rating bintang & komentar.
+- **Gratis Ongkos Kirim**: Perhitungan ongkir otomatis Rp 0 untuk seluruh wilayah tujuan.
 
-## Learning Laravel
+### 👑 Sisi Admin (Filament Dashboard)
+- **Dashboard Analitik**: Ringkasan total pendapatan, jumlah pesanan, dan statistik bisnis real-time.
+- **Manajemen Pesanan**: Update status pembayaran (`Pending`, `Lunas`, `Gagal`) dan status pengiriman (`Diproses`, `Dikirim`, `Selesai`).
+- **Input Nomor Resi Ekspedisi**: Mengirimkan nomor resi kurir kepada pembeli untuk pelacakan paket.
+- **Moderasi Ulasan**: Menyetujui (*approve*) atau menolak ulasan pembeli sebelum tampil di katalog produk.
+- **Manajemen Katalog & Stok**: Tambah/edit produk, varian harga, stok pcs, dan galeri foto produk.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### ✉️ Sistem Email & Notifikasi
+- **Notifikasi Email Otomatis**: Template Blade HTML eksklusif untuk konfirmasi pesanan baru (*Order Created*) dan pemberitahuan pengiriman paket (*Order Shipped*).
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## 🛠️ Teknologi & Stack
 
-## Agentic Development
+- **Framework**: Laravel 13.x
+- **Admin Panel**: Filament v3 (Green Brand Theme `#2D4A3E`)
+- **Frontend**: Blade Components, Tailwind CSS, Google Fonts (Cormorant Garamond & Plus Jakarta Sans)
+- **Iconography**: Material Symbols Outlined
+- **Database**: SQLite (Lokal) / MySQL (Produksi)
+- **Testing**: PHPUnit / Pest Automated Tests
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+---
 
+## 🚀 Panduan Instalasi Lokal
+
+### 1. Clone Repository
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/FerrelHD/Fersya-Shop.git
+cd Fersya-Shop
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Install Dependencies
+```bash
+composer install
+npm install
+```
 
-## Contributing
+### 3. Setup Environment File
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 4. Setup Database & Seeder
+```bash
+touch database/database.sqlite
+php artisan migrate --seed
+```
 
-## Code of Conduct
+### 5. Jalankan Application Server
+Buka 2 terminal terpisah:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**Terminal 1 (Laravel Server):**
+```bash
+php artisan serve
+```
 
-## Security Vulnerabilities
+**Terminal 2 (Vite Assets Builder):**
+```bash
+npm run dev
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Buka browser di `http://127.0.0.1:8000`.
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🔑 Kredensial Admin Default
+
+- **URL Dashboard Admin**: `http://127.0.0.1:8000/admin`
+- **Email**: `admin@fersya.test`
+- **Password**: `fersya2025`
+
+---
+
+## 🌐 Persiapan Deployment / Hosting
+
+Saat siap diunggah ke server hosting (cPanel / VPS):
+
+1. **Ubah `.env`**:
+   - `APP_ENV=production`
+   - `APP_DEBUG=false`
+   - `APP_URL=https://domain-anda.com`
+   - Konfigurasi `DB_HOST`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` (MySQL).
+2. **Jalankan Perintah Produksi**:
+   ```bash
+   php artisan storage:link
+   php artisan config:cache
+   php artisan route:cache
+   php artisan view:cache
+   ```
+
+---
+
+## 📄 Lisensi
+Project ini dibuat di bawah lisensi [MIT License](LICENSE).
