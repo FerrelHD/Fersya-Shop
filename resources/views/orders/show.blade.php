@@ -30,7 +30,7 @@
 
 <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-sky-50 text-sky-700 border border-sky-200/60 shadow-sm">
 <span class="material-symbols-outlined text-sm text-sky-600">local_shipping</span>
-<span>Pengiriman: {{ ucfirst($order->shipping_status) }}</span>
+<span>Pengiriman: {{ ucwords(str_replace('_', ' ', $order->shipping_status)) }}</span>
 </span>
 </div>
 </div>
@@ -115,10 +115,16 @@ $waUrl = "https://wa.me/6281321686115?text={$waText}";
 <span>Konfirmasi Pembayaran via WA</span>
 </a>
 </div>
+@elseif ($order->payment_status === 'paid')
+<div class="mt-8 pt-6 border-t border-outline-variant text-center">
+<div class="bg-emerald-50 p-4 rounded-xl text-emerald-700 font-bold text-sm border border-emerald-200/60">
+✅ Pembayaran telah berhasil dikonfirmasi.
+</div>
+</div>
 @else
 <div class="mt-8 pt-6 border-t border-outline-variant text-center">
-<div class="bg-primary-fixed/40 p-4 rounded-xl text-primary font-bold text-sm">
-✅ Pembayaran telah berhasil dikonfirmasi oleh Admin.
+<div class="bg-red-50 p-4 rounded-xl text-red-700 font-bold text-sm border border-red-200/60">
+❌ Pembayaran gagal atau ditolak. Silakan hubungi Admin untuk informasi lebih lanjut.
 </div>
 </div>
 @endif

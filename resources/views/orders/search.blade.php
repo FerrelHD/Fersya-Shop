@@ -44,7 +44,7 @@
 @endif
 <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 text-sky-700 border border-sky-200/60">
 <span class="material-symbols-outlined text-xs text-sky-600">local_shipping</span>
-<span>{{ ucfirst($order->shipping_status) }}</span>
+<span>{{ ucwords(str_replace('_', ' ', $order->shipping_status)) }}</span>
 </span>
 </div>
 <p class="text-on-surface-variant text-sm">Pembeli: <strong>{{ $order->guest_name }}</strong> ({{ $order->guest_phone }}) · Tanggal: {{ $order->created_at->format('d M Y, H:i') }}</p>
