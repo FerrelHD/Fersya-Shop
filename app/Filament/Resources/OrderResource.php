@@ -39,10 +39,15 @@ class OrderResource extends Resource
                             ->prefix('Rp')
                             ->disabled()
                             ->numeric(),
-                        Forms\Components\TextInput::make('payment_status')
+                        Forms\Components\Select::make('payment_status')
                             ->label('Status Pembayaran')
-                            ->disabled()
-                            ->helperText('Diupdate otomatis via Midtrans.'),
+                            ->options([
+                                'pending' => 'Pending (Belum Bayar)',
+                                'paid' => 'Lunas (Sudah Bayar)',
+                                'failed' => 'Gagal / Batal',
+                            ])
+                            ->required()
+                            ->helperText('Ubah ke Lunas setelah konfirmasi mutasi masuk.'),
                         Forms\Components\Select::make('shipping_status')
                             ->label('Status Pengiriman')
                             ->options([

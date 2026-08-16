@@ -88,13 +88,6 @@ $waUrl = "https://wa.me/6281321686115?text={$waText}";
 <span class="material-symbols-outlined">chat</span>
 <span>Konfirmasi Pembayaran via WA</span>
 </a>
-
-<form method="POST" action="{{ route('midtrans.simulate', $order) }}" class="mt-4">
-@csrf
-<button type="submit" class="w-full text-xs text-on-surface-variant hover:text-primary underline py-2">
-(Developer Mode: Tandai Langsung Lunas)
-</button>
-</form>
 </div>
 @else
 <div class="mt-8 pt-6 border-t border-outline-variant text-center">
