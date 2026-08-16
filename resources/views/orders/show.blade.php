@@ -31,6 +31,11 @@ Pengiriman: {{ ucfirst($order->shipping_status) }}
 <div>
 <h4 class="font-headline-md text-base text-primary font-bold">{{ $item->variant->product->name }}</h4>
 <p class="text-xs text-on-surface-variant">Varian: {{ $item->variant->name }} (x{{ $item->quantity }})</p>
+@if ($order->payment_status === 'paid')
+<a href="{{ route('products.show', ['product' => $item->variant->product, 'order' => $order->order_number]) }}#review-section" class="inline-block text-xs text-primary font-bold hover:underline mt-2">
+⭐ Beri Ulasan Produk Ini
+</a>
+@endif
 </div>
 <span class="font-bold text-primary">Rp {{ number_format($item->price * $item->quantity, 0, ',', '.') }}</span>
 </div>

@@ -88,12 +88,12 @@
 </div>
 </section>
 
-<section class="bg-surface-container-low py-section-gap">
+<section class="bg-surface-container-low py-section-gap" id="review-section">
 <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
 <h2 class="font-headline-lg text-headline-lg text-primary mb-12">Ulasan Pelanggan</h2>
 
 @if (session('review_status'))
-<p class="mb-8 font-body-md text-primary">{{ session('review_status') }}</p>
+<p class="mb-8 font-body-md text-primary font-bold bg-primary-fixed text-on-primary-fixed p-4 rounded-xl">{{ session('review_status') }}</p>
 @endif
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-grid-gutter mb-16">
@@ -111,12 +111,12 @@
 @endforelse
 </div>
 
-<div class="max-w-lg bg-surface p-8 rounded-2xl">
+<div class="max-w-lg bg-surface p-8 rounded-2xl ambient-shadow">
 <h3 class="font-headline-md text-body-lg text-primary mb-4">Sudah pernah beli produk ini?</h3>
-<p class="text-on-surface-variant font-body-md mb-6">Masukkan nomor pesanan yang sudah selesai untuk kasih ulasan.</p>
+<p class="text-on-surface-variant font-body-md mb-6">Masukkan nomor pesanan Anda untuk memberikan ulasan.</p>
 <form method="POST" action="{{ route('reviews.store', $product) }}" class="space-y-4">
 @csrf
-<input type="text" name="order_number" placeholder="Nomor pesanan" required class="w-full border border-outline rounded-lg py-3 px-4"/>
+<input type="text" name="order_number" value="{{ request('order', old('order_number')) }}" placeholder="Nomor pesanan (contoh: FS-XXXXXXXX)" required class="w-full border border-outline rounded-lg py-3 px-4"/>
 <select name="rating" required class="w-full border border-outline rounded-lg py-3 px-4">
 <option value="5">5 - Sangat puas</option>
 <option value="4">4 - Puas</option>
