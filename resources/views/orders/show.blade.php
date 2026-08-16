@@ -73,7 +73,7 @@ Pengiriman: {{ ucfirst($order->shipping_status) }}
 @if ($order->payment_status === 'pending')
 @php
 $waText = rawurlencode("Halo Admin Fersya Shop, saya ingin konfirmasi pembayaran untuk pesanan:\n\n*Nomor Pesanan:* {$order->order_number}\n*Nama:* {$order->guest_name}\n*Total:* Rp " . number_format($order->total_amount, 0, ',', '.') . "\n\nBerikut saya sertakan bukti transfer / scan QRIS.");
-$waUrl = "https://wa.me/6281234567890?text={$waText}";
+$waUrl = "https://wa.me/6281321686115?text={$waText}";
 @endphp
 
 <!-- Pembayaran QRIS Card -->
