@@ -3,7 +3,6 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\MidtransWebhookController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
@@ -28,4 +27,3 @@ Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.s
 
 Route::get('/cek-pesanan', [OrderController::class, 'search'])->name('orders.search');
 Route::get('/pesanan/{order:order_number}', [OrderController::class, 'show'])->name('orders.show');
-Route::post('/pesanan/{order:order_number}/simulasi-bayar', [MidtransWebhookController::class, 'handle'])->name('midtrans.simulate');
