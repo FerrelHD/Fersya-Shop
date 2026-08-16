@@ -9,17 +9,17 @@
 </head>
 <body class="bg-background text-on-background font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
 <header class="bg-surface sticky top-0 z-50 w-full transition-all duration-300">
-<div class="flex justify-between items-center w-full px-grid-margin max-w-[1280px] mx-auto h-20">
+<div class="flex justify-between items-center w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 h-20">
 <a href="{{ route('home') }}" class="font-headline-md text-headline-md text-primary tracking-tight">Fersya Shop</a>
 <nav class="hidden md:flex items-center space-x-8">
-<a class="{{ request()->routeIs('katalog.index') ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-secondary hover:text-primary transition-colors duration-200' }} font-body-md text-body-md" href="{{ route('katalog.index') }}">Shop All</a>
-<a class="text-secondary hover:text-primary transition-colors duration-200 font-body-md text-body-md" href="{{ route('katalog.index', ['kategori' => 'roti-gandum']) }}">Artisan Bread</a>
-<a class="text-secondary hover:text-primary transition-colors duration-200 font-body-md text-body-md" href="{{ route('katalog.index', ['kategori' => 'kopi']) }}">Organic Coffee</a>
-<a class="text-secondary hover:text-primary transition-colors duration-200 font-body-md text-body-md" href="{{ route('katalog.index', ['kategori' => 'teh-herbal']) }}">Herbal Tea</a>
+<a class="{{ request()->routeIs('katalog.index') && !request('kategori') ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-secondary hover:text-primary transition-colors duration-200' }} font-body-md text-body-md" href="{{ route('katalog.index') }}">Shop All</a>
+<a class="{{ request('kategori') === 'roti-gandum' ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-secondary hover:text-primary transition-colors duration-200' }} font-body-md text-body-md" href="{{ route('katalog.index', ['kategori' => 'roti-gandum']) }}">Artisan Bread</a>
+<a class="{{ request('kategori') === 'kopi' ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-secondary hover:text-primary transition-colors duration-200' }} font-body-md text-body-md" href="{{ route('katalog.index', ['kategori' => 'kopi']) }}">Organic Coffee</a>
+<a class="{{ request('kategori') === 'teh-herbal' ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-secondary hover:text-primary transition-colors duration-200' }} font-body-md text-body-md" href="{{ route('katalog.index', ['kategori' => 'teh-herbal']) }}">Herbal Tea</a>
 </nav>
 <div class="flex items-center space-x-6">
 <a href="{{ route('cart.index') }}" class="text-primary hover:opacity-80 transition-opacity flex items-center relative">
-<span class="material-symbols-outlined">shopping_bag</span>
+<span class="material-symbols-outlined text-2xl">shopping_bag</span>
 @if (($cartCount ?? 0) > 0)
 <span class="absolute -top-2 -right-2 bg-primary text-on-primary text-[10px] w-4 h-4 rounded-full flex items-center justify-center">{{ $cartCount }}</span>
 @endif
@@ -61,7 +61,7 @@
 </main>
 
 <footer class="bg-surface-container-low w-full py-section-gap">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-grid-gutter px-grid-margin max-w-[1280px] mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-grid-gutter px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
 <div class="md:col-span-1">
 <div class="font-headline-md text-headline-md text-primary mb-6">Fersya Shop</div>
 <p class="text-on-secondary-container font-body-md leading-relaxed mb-6">

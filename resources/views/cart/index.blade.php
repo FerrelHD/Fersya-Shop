@@ -1,5 +1,5 @@
 <x-layouts.app title="Keranjang | Fersya Shop">
-<section class="px-grid-margin max-w-[1280px] mx-auto py-16">
+<section class="px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto py-16">
 <h1 class="font-headline-lg text-headline-lg text-primary mb-12">Keranjang Belanja</h1>
 
 @if ($items->isEmpty())

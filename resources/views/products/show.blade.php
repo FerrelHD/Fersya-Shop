@@ -1,5 +1,5 @@
 <x-layouts.app :title="$product->name . ' | Fersya Shop'">
-<section class="px-grid-margin max-w-[1280px] mx-auto py-16">
+<section class="px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto py-16">
 <div class="flex flex-col md:flex-row gap-16">
 <div class="w-full md:w-1/2">
 <div class="aspect-square rounded-2xl overflow-hidden bg-surface-container">
@@ -89,7 +89,7 @@
 </section>
 
 <section class="bg-surface-container-low py-section-gap">
-<div class="max-w-[1280px] mx-auto px-grid-margin">
+<div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
 <h2 class="font-headline-lg text-headline-lg text-primary mb-12">Ulasan Pelanggan</h2>
 
 @if (session('review_status'))

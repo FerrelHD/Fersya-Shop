@@ -1,54 +1,57 @@
 <x-layouts.app title="Fersya Shop | Hidup Sehat, Disederhanakan">
 <!-- Hero Section -->
-<section class="relative min-h-[85vh] flex items-center overflow-hidden bg-surface-container-low">
-<div class="absolute inset-0 z-0">
+<section class="py-12 md:py-20 bg-surface-container-low overflow-hidden">
+<div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+<div class="lg:col-span-7 space-y-6 reveal">
+<span class="font-label-sm text-label-sm text-primary tracking-widest uppercase block">Premium Health-Conscious Retail</span>
+<h1 class="font-display-lg text-4xl sm:text-5xl lg:text-6xl text-primary font-bold leading-tight">Hidup sehat, disederhanakan</h1>
+<p class="font-body-lg text-lg text-on-surface-variant max-w-xl leading-relaxed">Bahan jujur untuk hidup yang lebih baik. Kami mengkurasi roti gandum, kopi pilihan, dan ramuan herbal terbaik untuk Anda.</p>
+<div class="flex flex-col sm:flex-row gap-4 pt-4">
+<a class="bg-primary text-on-primary px-8 py-4 rounded-xl font-body-md text-center hover:bg-opacity-90 transition-all ambient-shadow" href="{{ route('katalog.index') }}">Belanja Sekarang</a>
+<a class="border border-outline text-primary px-8 py-4 rounded-xl font-body-md text-center hover:bg-surface-container transition-all" href="{{ route('katalog.index') }}">Lihat Katalog</a>
+</div>
+</div>
+<div class="lg:col-span-5 reveal" style="transition-delay: 150ms;">
+<div class="relative rounded-3xl overflow-hidden ambient-shadow aspect-[4/3] lg:aspect-[4/5]">
 <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ asset('images/hero.png') }}')"></div>
 </div>
-<div class="absolute inset-0 hero-gradient hidden md:block"></div>
-<div class="absolute inset-0 bg-surface/40 md:hidden"></div>
-<div class="relative z-10 max-w-[1280px] mx-auto px-grid-margin w-full">
-<div class="max-w-2xl reveal">
-<span class="font-label-sm text-label-sm text-primary tracking-widest uppercase mb-6 block">Premium Health-Conscious Retail</span>
-<h1 class="font-display-lg text-display-lg text-primary mb-8">Hidup sehat, disederhanakan</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant mb-12">Bahan jujur untuk hidup yang lebih baik. Kami mengkurasi roti gandum, kopi pilihan, dan ramuan herbal terbaik untuk Anda.</p>
-<div class="flex flex-col sm:flex-row gap-6">
-<a class="bg-primary text-on-primary px-10 py-5 rounded-lg font-body-md text-body-md hover:bg-opacity-90 transition-all text-center ambient-shadow" href="{{ route('katalog.index') }}">Belanja Sekarang</a>
-<a class="border border-outline text-primary px-10 py-5 rounded-lg font-body-md text-body-md hover:bg-surface-container transition-all text-center" href="{{ route('katalog.index') }}">Lihat Katalog</a>
 </div>
 </div>
 </div>
 </section>
+
 <!-- Product Categories -->
-<section class="py-section-gap px-grid-margin max-w-[1280px] mx-auto">
+<section class="py-section-gap px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
 <div class="grid grid-cols-1 md:grid-cols-3 gap-grid-gutter">
 <a href="{{ route('katalog.index', ['kategori' => 'roti-gandum']) }}" class="group cursor-pointer reveal block">
-<div class="aspect-[4/5] bg-surface-container mb-8 overflow-hidden rounded-xl">
+<div class="aspect-[4/5] bg-surface-container mb-8 overflow-hidden rounded-2xl">
 <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('{{ asset('images/bread.png') }}')"></div>
 </div>
 <div class="flex items-center mb-4">
-<span class="material-symbols-outlined text-primary-container mr-3">bakery_dining</span>
+<span class="material-symbols-outlined text-primary-container mr-3 text-2xl">bakery_dining</span>
 <h3 class="font-headline-md text-headline-md text-primary">Roti Gandum</h3>
 </div>
 <p class="text-secondary font-body-md mb-6">Dibuat dengan ragi alami dan gandum utuh organik tanpa pengawet.</p>
 <span class="text-primary font-semibold flex items-center group-hover:gap-2 transition-all">Jelajahi <span class="material-symbols-outlined ml-1">arrow_forward</span></span>
 </a>
 <a href="{{ route('katalog.index', ['kategori' => 'kopi']) }}" class="group cursor-pointer reveal block" style="transition-delay: 100ms;">
-<div class="aspect-[4/5] bg-surface-container mb-8 overflow-hidden rounded-xl">
+<div class="aspect-[4/5] bg-surface-container mb-8 overflow-hidden rounded-2xl">
 <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('{{ asset('images/coffee.png') }}')"></div>
 </div>
 <div class="flex items-center mb-4">
-<span class="material-symbols-outlined text-primary-container mr-3">coffee</span>
+<span class="material-symbols-outlined text-primary-container mr-3 text-2xl">coffee</span>
 <h3 class="font-headline-md text-headline-md text-primary">Kopi</h3>
 </div>
 <p class="text-secondary font-body-md mb-6">Biji kopi pilihan dari dataran tinggi Indonesia, disangrai dengan presisi.</p>
 <span class="text-primary font-semibold flex items-center group-hover:gap-2 transition-all">Jelajahi <span class="material-symbols-outlined ml-1">arrow_forward</span></span>
 </a>
 <a href="{{ route('katalog.index', ['kategori' => 'teh-herbal']) }}" class="group cursor-pointer reveal block" style="transition-delay: 200ms;">
-<div class="aspect-[4/5] bg-surface-container mb-8 overflow-hidden rounded-xl">
+<div class="aspect-[4/5] bg-surface-container mb-8 overflow-hidden rounded-2xl">
 <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('{{ asset('images/tea.png') }}')"></div>
 </div>
 <div class="flex items-center mb-4">
-<span class="material-symbols-outlined text-primary-container mr-3">eco</span>
+<span class="material-symbols-outlined text-primary-container mr-3 text-2xl">eco</span>
 <h3 class="font-headline-md text-headline-md text-primary">Teh Herbal</h3>
 </div>
 <p class="text-secondary font-body-md mb-6">Ramuan bunga dan herba untuk menenangkan pikiran dan raga.</p>
@@ -56,9 +59,10 @@
 </a>
 </div>
 </section>
+
 <!-- Best Sellers Section -->
 <section class="bg-surface-container-low py-section-gap overflow-hidden">
-<div class="max-w-[1280px] mx-auto px-grid-margin">
+<div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
 <div class="flex justify-between items-end mb-16 reveal">
 <div>
 <span class="font-label-sm text-label-sm text-primary uppercase tracking-[0.2em] mb-4 block">Pilihan Terfavorit</span>
@@ -69,21 +73,22 @@
 <div class="grid grid-cols-1 md:grid-cols-3 gap-grid-gutter">
 @foreach ($bestSellers as $product)
 <a href="{{ route('products.show', $product) }}" class="bg-surface p-6 rounded-2xl ambient-shadow reveal hover-lift block" style="transition-delay: {{ $loop->index * 100 }}ms;">
-<div class="aspect-square mb-6 overflow-hidden rounded-lg">
-<div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ $product->primaryImage()?->image_path }}')"></div>
+<div class="aspect-square mb-6 overflow-hidden rounded-xl">
+<div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ asset($product->primaryImage()?->image_path ?? 'images/bread.png') }}')"></div>
 </div>
 <div class="text-center">
 <h4 class="font-headline-md text-body-lg text-primary mb-2">{{ $product->name }}</h4>
 <p class="text-primary font-bold mb-6">Rp {{ number_format($product->base_price, 0, ',', '.') }}</p>
-<span class="block w-full border border-primary text-primary py-3 rounded-lg">Lihat Produk</span>
+<span class="block w-full border border-primary text-primary py-3 rounded-lg hover:bg-primary hover:text-on-primary transition-all">Lihat Produk</span>
 </div>
 </a>
 @endforeach
 </div>
 </div>
 </section>
+
 <!-- Story/Source Section -->
-<section class="py-section-gap px-grid-margin max-w-[1280px] mx-auto">
+<section class="py-section-gap px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
 <div class="flex flex-col md:flex-row items-center gap-16">
 <div class="w-full md:w-1/2 reveal">
 <div class="relative">
@@ -114,13 +119,14 @@
 </div>
 </li>
 </ul>
-<a class="inline-block bg-primary text-on-primary px-10 py-5 rounded-lg hover:bg-opacity-90 transition-all font-body-md text-body-md" href="{{ route('katalog.index') }}">Pelajari Visi Kami</a>
+<a class="inline-block bg-primary text-on-primary px-10 py-5 rounded-xl hover:bg-opacity-90 transition-all font-body-md text-body-md" href="{{ route('katalog.index') }}">Pelajari Visi Kami</a>
 </div>
 </div>
 </section>
+
 <!-- Testimonials -->
 <section class="bg-surface py-section-gap">
-<div class="max-w-[1280px] mx-auto px-grid-margin">
+<div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
 <div class="text-center mb-16 reveal">
 <h2 class="font-headline-lg text-headline-lg text-primary mb-4">Cerita dari pelanggan</h2>
 <div class="h-1 w-20 bg-primary-container mx-auto"></div>
@@ -163,8 +169,9 @@
 </div>
 </div>
 </section>
+
 <!-- FAQ -->
-<section class="py-section-gap px-grid-margin max-w-[1280px] mx-auto">
+<section class="py-section-gap px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
 <div class="max-w-3xl mx-auto reveal">
 <h2 class="font-headline-lg text-headline-lg text-primary mb-12 text-center">Pertanyaan Umum</h2>
 <div class="space-y-4">

@@ -1,5 +1,5 @@
 <x-layouts.app title="Checkout | Fersya Shop">
-<section class="px-grid-margin max-w-[1280px] mx-auto py-16">
+<section class="px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto py-16">
 <h1 class="font-headline-lg text-headline-lg text-primary mb-12">Checkout</h1>
 <div class="flex flex-col md:flex-row gap-16">
 <form method="POST" action="{{ route('checkout.store') }}" class="w-full md:w-2/3 space-y-6">

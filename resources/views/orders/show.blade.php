@@ -1,5 +1,5 @@
 <x-layouts.app title="Pesanan {{ $order->order_number }} | Fersya Shop">
-<section class="px-grid-margin max-w-[1280px] mx-auto py-16">
+<section class="px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto py-16">
 @if (session('status'))
 <div class="bg-primary-fixed text-on-primary-fixed rounded-lg p-6 mb-8 font-body-md">{{ session('status') }}</div>
 @endif
