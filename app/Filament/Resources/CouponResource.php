@@ -28,8 +28,7 @@ class CouponResource extends Resource
                     ->label('Kode Kupon')
                     ->placeholder('Contoh: FERSYA10')
                     ->required()
-                    ->unique(ignoreRecord: true)
-                    ->deferLoading(),
+                    ->unique(ignoreRecord: true),
                 Forms\Components\Select::make('type')
                     ->label('Tipe Diskon')
                     ->options([
