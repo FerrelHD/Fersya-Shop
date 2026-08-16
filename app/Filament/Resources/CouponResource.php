@@ -58,7 +58,7 @@ class CouponResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('code')
                     ->label('Kode')
-                    ->fontBold()
+                    ->weight('bold')
                     ->searchable()
                     ->copyable(),
                 Tables\Columns\TextColumn::make('type')
