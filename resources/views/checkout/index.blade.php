@@ -38,11 +38,19 @@
 <span>Rp {{ number_format($item['subtotal'], 0, ',', '.') }}</span>
 </div>
 @endforeach
-<div class="border-t border-outline-variant mt-4 pt-4 flex justify-between font-bold text-primary">
+<div class="border-t border-outline-variant mt-4 pt-4 flex justify-between font-bold text-primary"
+>
 <span>Subtotal</span>
 <span>Rp {{ number_format($total, 0, ',', '.') }}</span>
 </div>
-<p class="text-on-surface-variant text-sm mt-2">Ongkir dihitung otomatis berdasarkan kota tujuan saat pesanan dibuat.</p>
+<div class="flex justify-between items-center mt-2">
+<span class="text-sm text-on-surface-variant">Ongkos Kirim</span>
+<span class="text-sm font-bold text-green-700 bg-green-100 px-2 py-0.5 rounded-full">GRATIS</span>
+</div>
+<div class="border-t border-outline-variant mt-3 pt-3 flex justify-between font-bold text-primary text-lg">
+<span>Total</span>
+<span>Rp {{ number_format($total, 0, ',', '.') }}</span>
+</div>
 </div>
 </div>
 </section>
