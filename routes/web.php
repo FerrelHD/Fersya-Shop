@@ -21,9 +21,12 @@ Route::get('/keranjang', [CartController::class, 'index'])->name('cart.index');
 Route::post('/keranjang', [CartController::class, 'store'])->name('cart.store');
 Route::patch('/keranjang/{variant}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/keranjang/{variant}', [CartController::class, 'destroy'])->name('cart.destroy');
+Route::post('/kupon', [CartController::class, 'applyCoupon'])->name('coupon.apply');
+Route::delete('/kupon', [CartController::class, 'removeCoupon'])->name('coupon.remove');
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
 Route::get('/cek-pesanan', [OrderController::class, 'search'])->name('orders.search');
 Route::get('/pesanan/{order:order_number}', [OrderController::class, 'show'])->name('orders.show');
+Route::get('/pesanan/{order:order_number}/invoice', [OrderController::class, 'invoice'])->name('orders.invoice');

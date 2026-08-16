@@ -10,7 +10,10 @@
 <h1 class="font-headline-lg text-3xl sm:text-4xl text-primary font-bold">{{ $order->order_number }}</h1>
 <p class="text-on-surface-variant text-sm mt-1">Dibuat pada: {{ $order->created_at->format('d M Y, H:i') }}</p>
 </div>
-<div class="flex flex-wrap gap-2">
+<div class="flex flex-wrap items-center gap-2">
+<a href="{{ route('orders.invoice', $order) }}" target="_blank" class="px-4 py-2 rounded-full text-xs font-bold bg-primary text-on-primary hover:bg-opacity-90 transition-all flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">print</span> Cetak / PDF Invoice
+</a>
 <span class="px-4 py-2 rounded-full text-xs font-bold uppercase {{ $order->payment_status === 'paid' ? 'bg-primary-fixed text-on-primary-fixed' : 'bg-amber-100 text-amber-800' }}">
 Pembayaran: {{ $order->payment_status === 'paid' ? 'Sudah Bayar (Lunas)' : 'Menunggu Pembayaran' }}
 </span>
@@ -68,7 +71,13 @@ Pengiriman: {{ ucfirst($order->shipping_status) }}
 <div class="bg-surface p-8 rounded-2xl ambient-shadow">
 <h2 class="font-headline-md text-xl text-primary font-bold mb-4">Ringkasan Total</h2>
 <div class="space-y-2 text-sm">
-<div class="flex justify-between text-on-surface-variant"><span>Ongkos Kirim</span><span>Rp {{ number_format($order->shipping_cost, 0, ',', '.') }}</span></div>
+<div class="flex justify-between text-on-surface-variant"><span>Ongkos Kirim</span><span class="text-primary font-bold">GRATIS</span></div>
+@if ($order->discount_amount > 0)
+<div class="flex justify-between text-error font-bold">
+<span>Diskon Kupon ({{ $order->coupon_code }})</span>
+<span>-Rp {{ number_format($order->discount_amount, 0, ',', '.') }}</span>
+</div>
+@endif
 <div class="flex justify-between font-bold text-primary text-xl border-t border-outline-variant pt-4 mt-2">
 <span>Total Bayar</span>
 <span class="text-primary">Rp {{ number_format($order->total_amount, 0, ',', '.') }}</span>

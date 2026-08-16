@@ -17,11 +17,16 @@
 - **Keranjang Belanja Session**: Mengelola item belanja tanpa perlu login paksa (*guest checkout*).
 - **Pembayaran Barcode QRIS & Konfirmasi WhatsApp**: Mendukung scan QRIS (GoPay, OVO, Dana, ShopeePay, Bank Transfer) + tombol otomatis chat WA Admin (`081321686115`).
 - **Lacak & Cek Status Pesanan (`/cek-pesanan`)**: Pencarian instan riwayat pesanan menggunakan Nomor Pesanan (`FS-XXXXXXXX`) atau Nomor WhatsApp.
+- **Kupon Diskon & Promo**: Input kode promo (`FERSYA10` diskon 10%, `HEBAT15K` potongan Rp 15rb) di keranjang & checkout.
+- **Cetak / Download Invoice PDF**: Tombol otomatis untuk cetak/simpan struk belanja PDF resmi dari halaman detail pesanan.
+- **Announcement Bar Header**: Banner promo & pengumuman toko di paling atas header.
 - **Ulasan Produk Terverifikasi**: Pembeli yang sudah menyelesaikan pembayaran dapat mengirimkan rating bintang & komentar.
 - **Gratis Ongkos Kirim**: Perhitungan ongkir otomatis Rp 0 untuk seluruh wilayah tujuan.
 
 ### 👑 Sisi Admin (Filament Dashboard)
 - **Dashboard Analitik**: Ringkasan total pendapatan, jumlah pesanan, dan statistik bisnis real-time.
+- **Export Laporan Penjualan (CSV)**: 1-klik download rekap data pesanan & penjualan ke file CSV/Excel.
+- **Kelola Kupon Diskon**: Tambah/edit kupon promo (tipe persen/fixed, minimal belanja, status aktif).
 - **Manajemen Pesanan**: Update status pembayaran (`Pending`, `Lunas`, `Gagal`) dan status pengiriman (`Diproses`, `Dikirim`, `Selesai`).
 - **Input Nomor Resi Ekspedisi**: Mengirimkan nomor resi kurir kepada pembeli untuk pelacakan paket.
 - **Moderasi Ulasan**: Menyetujui (*approve*) atau menolak ulasan pembeli sebelum tampil di katalog produk.

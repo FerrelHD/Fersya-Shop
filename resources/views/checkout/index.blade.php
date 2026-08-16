@@ -38,18 +38,23 @@
 <span>Rp {{ number_format($item['subtotal'], 0, ',', '.') }}</span>
 </div>
 @endforeach
-<div class="border-t border-outline-variant mt-4 pt-4 flex justify-between font-bold text-primary"
->
+<div class="border-t border-outline-variant mt-4 pt-4 flex justify-between text-sm text-on-surface-variant">
 <span>Subtotal</span>
 <span>Rp {{ number_format($total, 0, ',', '.') }}</span>
 </div>
 <div class="flex justify-between items-center mt-2">
 <span class="text-sm text-on-surface-variant">Ongkos Kirim</span>
-<span class="text-sm font-bold text-green-700 bg-green-100 px-2 py-0.5 rounded-full">GRATIS</span>
+<span class="text-xs font-bold text-primary bg-primary-fixed/40 px-2 py-0.5 rounded-full">GRATIS</span>
 </div>
-<div class="border-t border-outline-variant mt-3 pt-3 flex justify-between font-bold text-primary text-lg">
-<span>Total</span>
-<span>Rp {{ number_format($total, 0, ',', '.') }}</span>
+@if ($discount > 0)
+<div class="flex justify-between items-center mt-2 text-sm text-error font-bold">
+<span>Diskon Kupon ({{ $coupon->code }})</span>
+<span>-Rp {{ number_format($discount, 0, ',', '.') }}</span>
+</div>
+@endif
+<div class="border-t border-outline-variant mt-3 pt-3 flex justify-between font-bold text-primary text-xl">
+<span>Total Bayar</span>
+<span>Rp {{ number_format($grandTotal, 0, ',', '.') }}</span>
 </div>
 </div>
 </div>

@@ -14,6 +14,9 @@ class CartController extends Controller
         return view('cart.index', [
             'items' => Cart::items(),
             'total' => Cart::total(),
+            'coupon' => Cart::coupon(),
+            'discount' => Cart::discount(),
+            'grandTotal' => Cart::grandTotal(),
         ]);
     }
 
@@ -58,5 +61,24 @@ class CartController extends Controller
         Cart::remove($variant);
 
         return back();
+    }
+
+    public function applyCoupon(Request $request): RedirectResponse
+    {
+        $request->validate(['code' => ['required', 'string']]);
+        $result = Cart::applyCoupon($request->string('code')->toString());
+
+        if (! $result['success']) {
+            return back()->withErrors(['coupon' => $result['message']]);
+        }
+
+        return back()->with('coupon_status', $result['message']);
+    }
+
+    public function removeCoupon(): RedirectResponse
+    {
+        Cart::removeCoupon();
+
+        return back()->with('coupon_status', 'Kupon dilepas.');
     }
 }

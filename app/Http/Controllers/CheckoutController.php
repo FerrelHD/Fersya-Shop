@@ -20,7 +20,13 @@ class CheckoutController extends Controller
             return redirect()->route('cart.index');
         }
 
-        return view('checkout.index', ['items' => $items, 'total' => Cart::total()]);
+        return view('checkout.index', [
+            'items' => $items,
+            'total' => Cart::total(),
+            'coupon' => Cart::coupon(),
+            'discount' => Cart::discount(),
+            'grandTotal' => Cart::grandTotal(),
+        ]);
     }
 
     public function store(Request $request): RedirectResponse
@@ -52,14 +58,18 @@ class CheckoutController extends Controller
 
         $shippingCost = ShippingCalculator::estimate($data['city']);
         $subtotal = Cart::total();
+        $discount = Cart::discount();
+        $coupon = Cart::coupon();
 
         $order = Order::create([
             'guest_name' => $data['guest_name'],
             'guest_phone' => $data['guest_phone'],
             'guest_email' => $data['guest_email'] ?? null,
             'order_number' => 'FS-'.strtoupper(Str::random(8)),
-            'total_amount' => $subtotal + $shippingCost,
+            'total_amount' => max(0, $subtotal + $shippingCost - $discount),
             'shipping_cost' => $shippingCost,
+            'discount_amount' => $discount,
+            'coupon_code' => $coupon?->code,
             'payment_status' => 'pending',
             'shipping_status' => 'menunggu_pembayaran',
         ]);

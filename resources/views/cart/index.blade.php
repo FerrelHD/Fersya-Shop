@@ -33,11 +33,55 @@
 @endforeach
 </div>
 
-<div class="flex justify-between items-center border-t border-outline-variant pt-8">
-<span class="font-headline-md text-body-lg text-primary">Subtotal</span>
-<span class="font-headline-md text-headline-md text-primary">Rp {{ number_format($total, 0, ',', '.') }}</span>
+<div class="bg-surface p-8 rounded-2xl ambient-shadow space-y-6">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-outline-variant pb-6">
+<div>
+<h4 class="font-headline-md text-base text-primary font-bold">Punya Kode Kupon / Promo?</h4>
+<p class="text-xs text-on-surface-variant">Coba gunakan <code class="bg-surface-container px-2 py-0.5 rounded text-primary font-bold">FERSYA10</code> (Diskon 10%) atau <code class="bg-surface-container px-2 py-0.5 rounded text-primary font-bold">HEBAT15K</code> (Potongan Rp 15rb)</p>
 </div>
-<a href="{{ route('checkout.index') }}" class="mt-8 inline-block bg-primary text-on-primary px-10 py-5 rounded-lg">Lanjut ke Checkout</a>
+
+@if ($coupon)
+<div class="flex items-center gap-3 bg-primary-fixed/40 px-4 py-2 rounded-xl">
+<span class="text-xs font-bold text-primary">Kupon Aktif: {{ $coupon->code }} (-Rp {{ number_format($discount, 0, ',', '.') }})</span>
+<form method="POST" action="{{ route('coupon.remove') }}">
+@csrf
+@method('DELETE')
+<button type="submit" class="text-xs text-error font-bold hover:underline">Lepas</button>
+</form>
+</div>
+@else
+<form method="POST" action="{{ route('coupon.apply') }}" class="flex gap-2 w-full sm:w-auto">
+@csrf
+<input type="text" name="code" placeholder="Masukkan kode promo" required class="uppercase border border-outline rounded-xl px-4 py-2 text-sm focus:border-primary focus:ring-0"/>
+<button type="submit" class="bg-secondary text-on-secondary font-bold px-5 py-2 rounded-xl text-sm hover:opacity-90 transition-all">Gunakan</button>
+</form>
+@endif
+</div>
+
+@if (session('coupon_status'))
+<p class="text-xs text-primary font-bold bg-primary-fixed/30 p-3 rounded-lg">{{ session('coupon_status') }}</p>
+@endif
+
+@if ($errors->has('coupon'))
+<p class="text-xs text-error font-bold bg-red-50 p-3 rounded-lg">{{ $errors->first('coupon') }}</p>
+@endif
+
+<div class="space-y-3 pt-2 text-sm">
+<div class="flex justify-between text-on-surface-variant"><span>Subtotal</span><span>Rp {{ number_format($total, 0, ',', '.') }}</span></div>
+<div class="flex justify-between text-on-surface-variant"><span>Ongkos Kirim</span><span class="text-primary font-bold">GRATIS</span></div>
+@if ($discount > 0)
+<div class="flex justify-between text-error font-bold"><span>Diskon Kupon ({{ $coupon->code }})</span><span>-Rp {{ number_format($discount, 0, ',', '.') }}</span></div>
+@endif
+<div class="flex justify-between items-center font-bold text-primary text-2xl border-t border-outline-variant pt-4">
+<span>Total Bayar</span>
+<span>Rp {{ number_format($grandTotal, 0, ',', '.') }}</span>
+</div>
+</div>
+
+<div class="pt-4 flex justify-end">
+<a href="{{ route('checkout.index') }}" class="w-full sm:w-auto text-center bg-primary text-on-primary px-10 py-5 rounded-xl font-bold shadow-md hover:bg-opacity-90 transition-all">Lanjut ke Checkout</a>
+</div>
+</div>
 @endif
 </section>
 </x-layouts.app>

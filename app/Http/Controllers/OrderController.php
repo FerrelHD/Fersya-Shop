@@ -41,4 +41,11 @@ class OrderController extends Controller
             'orders' => $orders,
         ]);
     }
+
+    public function invoice(Order $order): View
+    {
+        $order->load(['items.variant.product', 'shippingAddress']);
+
+        return view('orders.invoice', ['order' => $order]);
+    }
 }

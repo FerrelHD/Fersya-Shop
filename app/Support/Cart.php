@@ -36,6 +36,58 @@ class Cart
     public static function clear(): void
     {
         Session::forget(self::SESSION_KEY);
+        Session::forget('applied_coupon');
+    }
+
+    public static function applyCoupon(string $code): array
+    {
+        $code = strtoupper(trim($code));
+        $coupon = \App\Models\Coupon::where('code', $code)->where('is_active', true)->first();
+
+        if (! $coupon) {
+            return ['success' => false, 'message' => 'Kode kupon tidak ditemukan atau sudah tidak aktif.'];
+        }
+
+        $subtotal = self::total();
+        if ($subtotal < $coupon->min_spend) {
+            return [
+                'success' => false,
+                'message' => 'Minimal belanja untuk kupon ini adalah Rp ' . number_format($coupon->min_spend, 0, ',', '.'),
+            ];
+        }
+
+        Session::put('applied_coupon', $coupon->code);
+        return ['success' => true, 'message' => 'Kupon berhasil dipasang!'];
+    }
+
+    public static function removeCoupon(): void
+    {
+        Session::forget('applied_coupon');
+    }
+
+    public static function coupon(): ?\App\Models\Coupon
+    {
+        $code = Session::get('applied_coupon');
+        if (! $code) return null;
+
+        $coupon = \App\Models\Coupon::where('code', $code)->where('is_active', true)->first();
+        if ($coupon && self::total() < $coupon->min_spend) {
+            self::removeCoupon();
+            return null;
+        }
+
+        return $coupon;
+    }
+
+    public static function discount(): int
+    {
+        $coupon = self::coupon();
+        return $coupon ? $coupon->calculateDiscount(self::total()) : 0;
+    }
+
+    public static function grandTotal(): int
+    {
+        return max(0, self::total() - self::discount());
     }
 
     /** @return Collection<int, array{variant: ProductVariant, quantity: int, subtotal: int}> */

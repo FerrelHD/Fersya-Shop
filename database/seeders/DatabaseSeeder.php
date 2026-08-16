@@ -14,11 +14,14 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
-        User::factory()->create([
-            'name' => 'Admin Fersya',
-            'email' => 'admin@fersya.test',
-            'role' => 'admin',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'admin@fersya.test'],
+            [
+                'name' => 'Admin Fersya',
+                'password' => bcrypt('fersya2025'),
+                'role' => 'admin',
+            ]
+        );
 
         $bread = Category::create(['name' => 'Roti Gandum', 'slug' => 'roti-gandum']);
         $coffee = Category::create(['name' => 'Kopi', 'slug' => 'kopi']);
@@ -65,5 +68,25 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
+
+        \App\Models\Coupon::firstOrCreate(
+            ['code' => 'FERSYA10'],
+            [
+                'type' => 'percent',
+                'value' => 10,
+                'min_spend' => 50000,
+                'is_active' => true,
+            ]
+        );
+
+        \App\Models\Coupon::firstOrCreate(
+            ['code' => 'HEBAT15K'],
+            [
+                'type' => 'fixed',
+                'value' => 15000,
+                'min_spend' => 100000,
+                'is_active' => true,
+            ]
+        );
     }
 }
