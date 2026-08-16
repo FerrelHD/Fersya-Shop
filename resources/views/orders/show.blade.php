@@ -10,15 +10,27 @@
 <h1 class="font-headline-lg text-3xl sm:text-4xl text-primary font-bold">{{ $order->order_number }}</h1>
 <p class="text-on-surface-variant text-sm mt-1">Dibuat pada: {{ $order->created_at->format('d M Y, H:i') }}</p>
 </div>
-<div class="flex flex-wrap items-center gap-2">
-<a href="{{ route('orders.invoice', $order) }}" target="_blank" class="px-4 py-2 rounded-full text-xs font-bold bg-primary text-on-primary hover:bg-opacity-90 transition-all flex items-center gap-1">
-<span class="material-symbols-outlined text-sm">print</span> Cetak / PDF Invoice
+<div class="flex flex-wrap items-center gap-2.5">
+<a href="{{ route('orders.invoice', $order) }}" target="_blank" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-primary text-on-primary hover:bg-opacity-90 transition-all shadow-sm">
+<span class="material-symbols-outlined text-sm">print</span>
+<span>Invoice PDF</span>
 </a>
-<span class="px-4 py-2 rounded-full text-xs font-bold uppercase {{ $order->payment_status === 'paid' ? 'bg-primary-fixed text-on-primary-fixed' : 'bg-amber-100 text-amber-800' }}">
-Pembayaran: {{ $order->payment_status === 'paid' ? 'Sudah Bayar (Lunas)' : 'Menunggu Pembayaran' }}
+
+@if ($order->payment_status === 'paid')
+<span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60 shadow-sm">
+<span class="material-symbols-outlined text-sm text-emerald-600">check_circle</span>
+<span>Pembayaran: Lunas</span>
 </span>
-<span class="px-4 py-2 rounded-full text-xs font-bold uppercase bg-surface-container text-on-surface-variant">
-Pengiriman: {{ ucfirst($order->shipping_status) }}
+@else
+<span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200/60 shadow-sm">
+<span class="material-symbols-outlined text-sm text-amber-600">schedule</span>
+<span>Pembayaran: Menunggu</span>
+</span>
+@endif
+
+<span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-sky-50 text-sky-700 border border-sky-200/60 shadow-sm">
+<span class="material-symbols-outlined text-sm text-sky-600">local_shipping</span>
+<span>Pengiriman: {{ ucfirst($order->shipping_status) }}</span>
 </span>
 </div>
 </div>

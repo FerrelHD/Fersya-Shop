@@ -29,13 +29,22 @@
 @foreach ($orders as $order)
 <div class="bg-surface p-6 sm:p-8 rounded-2xl ambient-shadow flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
 <div class="space-y-2">
-<div class="flex items-center gap-3">
+<div class="flex flex-wrap items-center gap-2">
 <span class="font-headline-md text-lg text-primary font-bold">{{ $order->order_number }}</span>
-<span class="text-xs px-3 py-1 rounded-full font-bold uppercase {{ $order->payment_status === 'paid' ? 'bg-primary-fixed text-on-primary-fixed' : 'bg-secondary-container text-primary' }}">
-{{ $order->payment_status === 'paid' ? 'Sudah Bayar' : 'Belum Bayar' }}
+@if ($order->payment_status === 'paid')
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+<span class="material-symbols-outlined text-xs text-emerald-600">check_circle</span>
+<span>Lunas</span>
 </span>
-<span class="text-xs px-3 py-1 rounded-full font-semibold bg-surface-container text-on-surface-variant">
-Status: {{ ucfirst($order->shipping_status) }}
+@else
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200/60">
+<span class="material-symbols-outlined text-xs text-amber-600">schedule</span>
+<span>Belum Bayar</span>
+</span>
+@endif
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 text-sky-700 border border-sky-200/60">
+<span class="material-symbols-outlined text-xs text-sky-600">local_shipping</span>
+<span>{{ ucfirst($order->shipping_status) }}</span>
 </span>
 </div>
 <p class="text-on-surface-variant text-sm">Pembeli: <strong>{{ $order->guest_name }}</strong> ({{ $order->guest_phone }}) · Tanggal: {{ $order->created_at->format('d M Y, H:i') }}</p>
