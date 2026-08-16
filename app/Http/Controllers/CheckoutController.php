@@ -86,6 +86,14 @@ class CheckoutController extends Controller
 
         Cart::clear();
 
+        if ($order->guest_email) {
+            try {
+                \Illuminate\Support\Facades\Mail::to($order->guest_email)->send(new \App\Mail\OrderCreatedMail($order));
+            } catch (\Throwable $e) {
+                \Illuminate\Support\Facades\Log::error('Gagal mengirim email pesanan: ' . $e->getMessage());
+            }
+        }
+
         return redirect()->route('orders.show', $order);
     }
 }
