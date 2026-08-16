@@ -1,6 +1,6 @@
 <x-layouts.app :title="$product->name . ' | Fersya Shop'">
 <section class="px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto py-16">
-<div class="flex flex-col md:flex-row gap-16">
+<div class="flex flex-col md:flex-row gap-8 md:gap-16">
 <div class="w-full md:w-1/2">
 <div class="aspect-square rounded-2xl overflow-hidden bg-surface-container">
 <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ asset($product->primaryImage()?->image_path ?? 'images/bread.png') }}')"></div>
@@ -63,8 +63,8 @@
 </div>
 @endif
 
-<div class="flex gap-4">
-<input type="number" name="quantity" value="1" min="1" {{ !$hasAvailableStock ? 'disabled' : '' }} class="w-20 border border-outline rounded-lg text-center py-3 {{ !$hasAvailableStock ? 'bg-surface-container opacity-50' : '' }}"/>
+<div class="flex gap-3">
+<input type="number" name="quantity" value="1" min="1" {{ !$hasAvailableStock ? 'disabled' : '' }} class="w-20 border border-outline rounded-lg text-center py-3 shrink-0 {{ !$hasAvailableStock ? 'bg-surface-container opacity-50' : '' }}"/>
 <button type="submit" {{ !$hasAvailableStock ? 'disabled' : '' }} class="flex-1 bg-primary text-on-primary py-3 rounded-lg hover:bg-opacity-90 transition-all {{ !$hasAvailableStock ? 'opacity-50 cursor-not-allowed' : '' }}">
 {{ $hasAvailableStock ? 'Tambah ke Keranjang' : 'Stok Habis' }}
 </button>

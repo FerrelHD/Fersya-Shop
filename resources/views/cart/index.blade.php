@@ -8,27 +8,29 @@
 @else
 <div class="space-y-6 mb-12">
 @foreach ($items as $item)
-<div class="flex items-center gap-6 bg-surface p-6 rounded-2xl ambient-shadow">
-<div class="w-24 h-24 rounded-lg overflow-hidden bg-surface-container shrink-0">
+<div class="flex flex-col sm:flex-row sm:items-center gap-4 bg-surface p-5 sm:p-6 rounded-2xl ambient-shadow">
+<div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden bg-surface-container shrink-0">
 <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ $item['variant']->product->primaryImage()?->image_path }}')"></div>
 </div>
-<div class="flex-1">
-<h3 class="font-headline-md text-body-lg text-primary">{{ $item['variant']->product->name }}</h3>
-<p class="text-on-surface-variant font-body-md">{{ $item['variant']->name }}</p>
-<p class="text-primary font-bold">Rp {{ number_format($item['variant']->price(), 0, ',', '.') }}</p>
+<div class="flex-1 min-w-0">
+<h3 class="font-headline-md text-body-lg text-primary truncate">{{ $item['variant']->product->name }}</h3>
+<p class="text-on-surface-variant font-body-md text-sm">{{ $item['variant']->name }}</p>
+<p class="text-primary font-bold text-sm">Rp {{ number_format($item['variant']->price(), 0, ',', '.') }}</p>
 </div>
+<div class="flex items-center justify-between sm:justify-end gap-3 flex-wrap">
 <form method="POST" action="{{ route('cart.update', $item['variant']->id) }}" class="flex items-center gap-2">
 @csrf
 @method('PATCH')
-<input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1" class="w-16 border border-outline rounded-lg text-center py-2"/>
-<button type="submit" class="text-primary underline text-sm">Update</button>
+<input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1" class="w-16 border border-outline rounded-lg text-center py-2 text-sm"/>
+<button type="submit" class="text-primary underline text-sm whitespace-nowrap">Update</button>
 </form>
 <form method="POST" action="{{ route('cart.destroy', $item['variant']->id) }}">
 @csrf
 @method('DELETE')
-<button type="submit" class="text-error underline text-sm">Hapus</button>
+<button type="submit" class="text-error underline text-sm whitespace-nowrap">Hapus</button>
 </form>
-<p class="font-bold text-primary w-32 text-right">Rp {{ number_format($item['subtotal'], 0, ',', '.') }}</p>
+<p class="font-bold text-primary text-sm sm:w-32 sm:text-right">Rp {{ number_format($item['subtotal'], 0, ',', '.') }}</p>
+</div>
 </div>
 @endforeach
 </div>

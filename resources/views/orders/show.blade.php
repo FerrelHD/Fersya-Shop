@@ -42,7 +42,7 @@
 <h2 class="font-headline-md text-xl text-primary font-bold mb-4">Item Produk</h2>
 <div class="space-y-4">
 @foreach ($order->items as $item)
-<div class="flex justify-between items-center bg-surface p-6 rounded-2xl ambient-shadow">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-surface p-5 sm:p-6 rounded-2xl ambient-shadow">
 <div>
 <h4 class="font-headline-md text-base text-primary font-bold">{{ $item->variant->product->name }}</h4>
 <p class="text-xs text-on-surface-variant">Varian: {{ $item->variant->name }} (x{{ $item->quantity }})</p>
@@ -52,7 +52,7 @@
 </a>
 @endif
 </div>
-<span class="font-bold text-primary">Rp {{ number_format($item->price * $item->quantity, 0, ',', '.') }}</span>
+<span class="font-bold text-primary text-sm sm:text-base">Rp {{ number_format($item->price * $item->quantity, 0, ',', '.') }}</span>
 </div>
 @endforeach
 </div>

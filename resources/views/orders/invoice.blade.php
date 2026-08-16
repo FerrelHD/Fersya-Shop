@@ -29,6 +29,15 @@
   .badge-pending { background: #fef3c7; color: #b45309; }
   .actions { text-align: center; margin-top: 32px; }
   .btn-print { background: #2d4a3e; color: #ffffff; border: none; padding: 14px 28px; font-size: 14px; font-weight: 700; border-radius: 10px; cursor: pointer; }
+  @media (max-width: 640px) {
+    body { padding: 16px 8px; }
+    .invoice-card { padding: 20px; }
+    .header { flex-direction: column; gap: 16px; text-align: left; }
+    .inv-number, .inv-date { text-align: left; }
+    .details-grid { grid-template-columns: 1fr; }
+    .detail-box.text-right { text-align: left; }
+    .totals-table { width: 100%; }
+  }
   @media print {
     body { background: #ffffff; padding: 0; }
     .invoice-card { box-shadow: none; padding: 0; }

@@ -1,7 +1,7 @@
 <x-layouts.app title="Checkout | Fersya Shop">
 <section class="px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto py-16">
 <h1 class="font-headline-lg text-headline-lg text-primary mb-12">Checkout</h1>
-<div class="flex flex-col md:flex-row gap-16">
+<div class="flex flex-col-reverse md:flex-row gap-8 md:gap-16">
 <form method="POST" action="{{ route('checkout.store') }}" class="w-full md:w-2/3 space-y-6">
 @csrf
 <h2 class="font-headline-md text-body-lg text-primary mb-2">Data Penerima</h2>
@@ -30,12 +30,12 @@
 <button type="submit" class="bg-primary text-on-primary px-10 py-5 rounded-lg w-full">Buat Pesanan</button>
 </form>
 
-<div class="w-full md:w-1/3 bg-surface-container-low p-8 rounded-2xl h-fit">
+<div class="w-full md:w-1/3 bg-surface-container-low p-6 md:p-8 rounded-2xl h-fit">
 <h2 class="font-headline-md text-body-lg text-primary mb-6">Ringkasan Pesanan</h2>
 @foreach ($items as $item)
-<div class="flex justify-between font-body-md mb-3">
-<span>{{ $item['variant']->product->name }} ({{ $item['variant']->name }}) x{{ $item['quantity'] }}</span>
-<span>Rp {{ number_format($item['subtotal'], 0, ',', '.') }}</span>
+<div class="flex justify-between font-body-md mb-3 gap-2">
+<span class="text-sm min-w-0 truncate">{{ $item['variant']->product->name }} ({{ $item['variant']->name }}) x{{ $item['quantity'] }}</span>
+<span class="text-sm shrink-0">Rp {{ number_format($item['subtotal'], 0, ',', '.') }}</span>
 </div>
 @endforeach
 <div class="border-t border-outline-variant mt-4 pt-4 flex justify-between text-sm text-on-surface-variant">

@@ -92,7 +92,7 @@
 
 <!-- Story/Source Section -->
 <section class="py-section-gap px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
-<div class="flex flex-col md:flex-row items-center gap-16">
+<div class="flex flex-col md:flex-row items-center gap-8 md:gap-16">
 <div class="w-full md:w-1/2 reveal">
 <div class="relative">
 <div class="aspect-[4/5] bg-surface-container-high rounded-3xl overflow-hidden">
@@ -135,7 +135,7 @@
 <div class="h-1 w-20 bg-primary-container mx-auto"></div>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-grid-gutter">
-<div class="bg-surface-container-low p-12 rounded-3xl reveal">
+<div class="bg-surface-container-low p-6 sm:p-12 rounded-3xl reveal">
 <div class="flex mb-6">
 @for ($i = 0; $i < 5; $i++)
 <span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">star</span>
@@ -152,7 +152,7 @@
 </div>
 </div>
 </div>
-<div class="bg-surface-container-low p-12 rounded-3xl reveal" style="transition-delay: 150ms;">
+<div class="bg-surface-container-low p-6 sm:p-12 rounded-3xl reveal" style="transition-delay: 150ms;">
 <div class="flex mb-6">
 @for ($i = 0; $i < 5; $i++)
 <span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">star</span>
