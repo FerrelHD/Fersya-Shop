@@ -63,9 +63,13 @@
 </div>
 @endif
 
-<div class="flex gap-3">
-<input type="number" name="quantity" value="1" min="1" {{ !$hasAvailableStock ? 'disabled' : '' }} class="w-20 border border-outline rounded-lg text-center py-3 shrink-0 {{ !$hasAvailableStock ? 'bg-surface-container opacity-50' : '' }}"/>
-<button type="submit" {{ !$hasAvailableStock ? 'disabled' : '' }} class="flex-1 bg-primary text-on-primary py-3 rounded-lg hover:bg-opacity-90 transition-all {{ !$hasAvailableStock ? 'opacity-50 cursor-not-allowed' : '' }}">
+<div class="flex gap-3 items-center">
+<div class="flex items-center border border-outline rounded-xl overflow-hidden shrink-0 {{ !$hasAvailableStock ? 'opacity-50' : '' }}">
+<button type="button" onclick="const i=this.nextElementSibling;i.value=Math.max(1,(+i.value||1)-1)" class="w-10 h-12 text-xl text-primary hover:bg-surface-container transition-colors flex items-center justify-center select-none {{ !$hasAvailableStock ? 'pointer-events-none' : '' }}">−</button>
+<input type="number" name="quantity" value="1" min="1" {{ !$hasAvailableStock ? 'disabled' : '' }} class="w-12 h-12 border-x border-outline text-center text-sm font-bold text-primary bg-transparent focus:outline-none appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"/>
+<button type="button" onclick="const i=this.previousElementSibling;i.value=(+i.value||1)+1" class="w-10 h-12 text-xl text-primary hover:bg-surface-container transition-colors flex items-center justify-center select-none {{ !$hasAvailableStock ? 'pointer-events-none' : '' }}">+</button>
+</div>
+<button type="submit" {{ !$hasAvailableStock ? 'disabled' : '' }} class="flex-1 bg-primary text-on-primary py-3 rounded-xl font-bold hover:bg-opacity-90 transition-all {{ !$hasAvailableStock ? 'opacity-50 cursor-not-allowed' : '' }}">
 {{ $hasAvailableStock ? 'Tambah ke Keranjang' : 'Stok Habis' }}
 </button>
 </div>
@@ -116,16 +120,19 @@
 <p class="text-on-surface-variant font-body-md mb-6">Masukkan nomor pesanan Anda untuk memberikan ulasan.</p>
 <form method="POST" action="{{ route('reviews.store', $product) }}" class="space-y-4">
 @csrf
-<input type="text" name="order_number" value="{{ request('order', old('order_number')) }}" placeholder="Nomor pesanan (contoh: FS-XXXXXXXX)" required class="w-full border border-outline rounded-lg py-3 px-4"/>
-<select name="rating" required class="w-full border border-outline rounded-lg py-3 px-4">
-<option value="5">5 - Sangat puas</option>
-<option value="4">4 - Puas</option>
-<option value="3">3 - Cukup</option>
-<option value="2">2 - Kurang</option>
-<option value="1">1 - Tidak puas</option>
+<input type="text" name="order_number" value="{{ request('order', old('order_number')) }}" placeholder="Nomor pesanan (contoh: FS-XXXXXXXX)" required class="w-full border border-outline rounded-xl py-3 px-4 font-body-md text-sm focus:border-primary focus:ring-0 focus:outline-none transition-colors bg-surface-container-low"/>
+<div class="relative">
+<select name="rating" required class="w-full border border-outline rounded-xl py-3 pl-4 pr-10 font-body-md text-sm text-primary focus:border-primary focus:ring-0 focus:outline-none transition-colors bg-surface-container-low appearance-none cursor-pointer">
+<option value="5">⭐⭐⭐⭐⭐ — Sangat Puas</option>
+<option value="4">⭐⭐⭐⭐ — Puas</option>
+<option value="3">⭐⭐⭐ — Cukup</option>
+<option value="2">⭐⭐ — Kurang</option>
+<option value="1">⭐ — Tidak Puas</option>
 </select>
-<textarea name="comment" placeholder="Ceritakan pengalamanmu" rows="3" class="w-full border border-outline rounded-lg py-3 px-4"></textarea>
-<button type="submit" class="bg-primary text-on-primary px-8 py-3 rounded-lg">Kirim Ulasan</button>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-base">expand_more</span>
+</div>
+<textarea name="comment" placeholder="Ceritakan pengalamanmu dengan produk ini..." rows="3" class="w-full border border-outline rounded-xl py-3 px-4 font-body-md text-sm focus:border-primary focus:ring-0 focus:outline-none transition-colors bg-surface-container-low resize-none"></textarea>
+<button type="submit" class="bg-primary text-on-primary px-8 py-3 rounded-xl font-bold hover:bg-opacity-90 transition-all w-full sm:w-auto">Kirim Ulasan</button>
 </form>
 </div>
 </div>

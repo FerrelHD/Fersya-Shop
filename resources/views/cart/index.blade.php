@@ -21,13 +21,17 @@
 <form method="POST" action="{{ route('cart.update', $item['variant']->id) }}" class="flex items-center gap-2">
 @csrf
 @method('PATCH')
-<input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1" class="w-16 border border-outline rounded-lg text-center py-2 text-sm"/>
-<button type="submit" class="text-primary underline text-sm whitespace-nowrap">Update</button>
+<div class="flex items-center border border-outline rounded-xl overflow-hidden">
+<button type="button" onclick="const i=this.nextElementSibling;i.value=Math.max(1,(+i.value||1)-1)" class="w-9 h-10 text-lg text-primary hover:bg-surface-container transition-colors flex items-center justify-center select-none">−</button>
+<input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1" class="w-10 h-10 border-x border-outline text-center text-sm font-bold text-primary bg-transparent focus:outline-none appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"/>
+<button type="button" onclick="const i=this.previousElementSibling;i.value=(+i.value||1)+1" class="w-9 h-10 text-lg text-primary hover:bg-surface-container transition-colors flex items-center justify-center select-none">+</button>
+</div>
+<button type="submit" class="h-10 px-4 bg-surface-container border border-outline text-primary rounded-xl text-xs font-bold hover:bg-primary hover:text-on-primary hover:border-primary transition-all whitespace-nowrap">Update</button>
 </form>
 <form method="POST" action="{{ route('cart.destroy', $item['variant']->id) }}">
 @csrf
 @method('DELETE')
-<button type="submit" class="text-error underline text-sm whitespace-nowrap">Hapus</button>
+<button type="submit" class="h-10 px-4 bg-error-container/40 border border-error/30 text-error rounded-xl text-xs font-bold hover:bg-error hover:text-on-error transition-all whitespace-nowrap">Hapus</button>
 </form>
 <p class="font-bold text-primary text-sm sm:w-32 sm:text-right">Rp {{ number_format($item['subtotal'], 0, ',', '.') }}</p>
 </div>
