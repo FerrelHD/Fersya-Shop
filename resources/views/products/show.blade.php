@@ -12,6 +12,11 @@
 <p class="font-body-lg text-body-lg text-on-surface-variant mb-8">{{ $product->description }}</p>
 
 @if (session('status'))
+<div class="mb-6 p-4 rounded-lg bg-primary-fixed text-on-primary-fixed font-body-md">
+    {{ session('status') }}
+</div>
+@endif
+
 @if ($errors->any())
 <div class="mb-6 p-4 rounded-lg bg-error-container text-on-error-container font-body-md">
     <ul>
