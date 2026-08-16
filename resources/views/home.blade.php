@@ -1,21 +1,24 @@
 <x-layouts.app title="Fersya Shop | Hidup Sehat, Disederhanakan">
-<!-- Hero Section -->
-<section class="py-12 md:py-20 bg-surface-container-low overflow-hidden">
-<div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
-<div class="lg:col-span-7 space-y-6 reveal">
+<!-- Hero Section (Full Background) -->
+<section class="relative min-h-[75vh] lg:min-h-[85vh] flex items-center overflow-hidden bg-surface-container-low">
+<!-- Background Image -->
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center sm:bg-[center_right]" style="background-image: url('{{ asset('images/hero.png') }}')"></div>
+</div>
+<!-- Desktop Gradient Overlay -->
+<div class="absolute inset-0 hero-gradient hidden md:block z-0"></div>
+<!-- Mobile Overlay for Readability -->
+<div class="absolute inset-0 bg-surface/85 backdrop-blur-[2px] md:hidden z-0"></div>
+
+<!-- Hero Content -->
+<div class="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 w-full py-16 lg:py-24">
+<div class="max-w-xl lg:max-w-2xl reveal space-y-6">
 <span class="font-label-sm text-label-sm text-primary tracking-widest uppercase block">Premium Health-Conscious Retail</span>
 <h1 class="font-display-lg text-4xl sm:text-5xl lg:text-6xl text-primary font-bold leading-tight">Hidup sehat, disederhanakan</h1>
-<p class="font-body-lg text-lg text-on-surface-variant max-w-xl leading-relaxed">Bahan jujur untuk hidup yang lebih baik. Kami mengkurasi roti gandum, kopi pilihan, dan ramuan herbal terbaik untuk Anda.</p>
+<p class="font-body-lg text-lg sm:text-xl text-on-surface-variant leading-relaxed">Bahan jujur untuk hidup yang lebih baik. Kami mengkurasi roti gandum, kopi pilihan, dan ramuan herbal terbaik untuk Anda.</p>
 <div class="flex flex-col sm:flex-row gap-4 pt-4">
 <a class="bg-primary text-on-primary px-8 py-4 rounded-xl font-body-md text-center hover:bg-opacity-90 transition-all ambient-shadow" href="{{ route('katalog.index') }}">Belanja Sekarang</a>
 <a class="border border-outline text-primary px-8 py-4 rounded-xl font-body-md text-center hover:bg-surface-container transition-all" href="{{ route('katalog.index') }}">Lihat Katalog</a>
-</div>
-</div>
-<div class="lg:col-span-5 reveal" style="transition-delay: 150ms;">
-<div class="relative rounded-3xl overflow-hidden ambient-shadow aspect-[4/3] lg:aspect-[4/5]">
-<div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ asset('images/hero.png') }}')"></div>
-</div>
 </div>
 </div>
 </div>
