@@ -19,17 +19,19 @@
 </form>
 </section>
 <section class="px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto pb-section-gap">
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-grid-gutter">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
 @forelse ($products as $product)
-<a href="{{ route('products.show', $product) }}" class="bg-surface p-6 rounded-2xl ambient-shadow hover-lift block">
-<div class="aspect-square mb-6 overflow-hidden rounded-xl">
+<a href="{{ route('products.show', $product) }}" class="bg-surface p-4 sm:p-5 rounded-2xl ambient-shadow hover-lift flex flex-col justify-between block">
+<div>
+<div class="aspect-[4/3] mb-4 overflow-hidden rounded-xl bg-surface-container">
 <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ asset($product->primaryImage()?->image_path ?? 'images/bread.png') }}')"></div>
 </div>
 <div class="text-center">
-<h4 class="font-headline-md text-body-lg text-primary mb-2">{{ $product->name }}</h4>
-<p class="text-primary font-bold mb-6">Rp {{ number_format($product->base_price, 0, ',', '.') }}</p>
-<span class="block w-full border border-primary text-primary py-3 rounded-lg hover:bg-primary hover:text-on-primary transition-all">Lihat Produk</span>
+<h4 class="font-headline-md text-base text-primary mb-1 line-clamp-1">{{ $product->name }}</h4>
+<p class="text-primary font-bold text-sm mb-4">Rp {{ number_format($product->base_price, 0, ',', '.') }}</p>
 </div>
+</div>
+<span class="block w-full border border-primary text-primary py-2.5 rounded-lg text-sm text-center font-semibold hover:bg-primary hover:text-on-primary transition-all">Lihat Produk</span>
 </a>
 @empty
 <p class="col-span-full text-center text-on-surface-variant font-body-md py-16">Produk tidak ditemukan. Coba kata kunci atau kategori lain.</p>
