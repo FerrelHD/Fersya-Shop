@@ -23,9 +23,9 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        $bread = Category::create(['name' => 'Roti Gandum', 'slug' => 'roti-gandum']);
-        $coffee = Category::create(['name' => 'Kopi', 'slug' => 'kopi']);
-        $tea = Category::create(['name' => 'Teh Herbal', 'slug' => 'teh-herbal']);
+        $bread = Category::firstOrCreate(['slug' => 'roti-gandum'], ['name' => 'Roti Gandum']);
+        $coffee = Category::firstOrCreate(['slug' => 'kopi'], ['name' => 'Kopi']);
+        $tea = Category::firstOrCreate(['slug' => 'teh-herbal'], ['name' => 'Teh Herbal']);
 
         $breadImg = '/images/bread.png';
         $breadImg2 = '/images/bread.png';
@@ -48,24 +48,31 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($products as [$category, $name, $price, $shelfLife, $image, $variants]) {
-            $product = Product::create([
-                'category_id' => $category->id,
-                'name' => $name,
-                'slug' => str($name)->slug(),
-                'description' => "Dipilih dengan tangan untuk kualitas terbaik dari {$category->name}.",
-                'base_price' => $price,
-                'shelf_life_info' => $shelfLife,
-            ]);
+            $slug = str($name)->slug();
+            $product = Product::firstOrCreate(
+                ['slug' => $slug],
+                [
+                    'category_id' => $category->id,
+                    'name' => $name,
+                    'description' => "Dipilih dengan tangan untuk kualitas terbaik dari {$category->name}.",
+                    'base_price' => $price,
+                    'shelf_life_info' => $shelfLife,
+                ]
+            );
 
-            $product->images()->create(['image_path' => $image, 'is_primary' => true]);
+            if (! $product->images()->exists()) {
+                $product->images()->create(['image_path' => $image, 'is_primary' => true]);
+            }
 
             foreach ($variants as [$variantName, $modifier, $stock, $sku]) {
-                $product->variants()->create([
-                    'name' => $variantName,
-                    'price_modifier' => $modifier,
-                    'stock' => $stock,
-                    'sku' => $sku,
-                ]);
+                $product->variants()->firstOrCreate(
+                    ['sku' => $sku],
+                    [
+                        'name' => $variantName,
+                        'price_modifier' => $modifier,
+                        'stock' => $stock,
+                    ]
+                );
             }
         }
 
@@ -88,5 +95,8 @@ class DatabaseSeeder extends Seeder
                 'is_active' => true,
             ]
         );
+
+        \App\Models\Setting::set('announcement_active', '1');
+        \App\Models\Setting::set('announcement_text', '🍞 Freshly Baked Everyday · 🚚 Gratis Ongkos Kirim · Gunakan Kupon FERSYA10 untuk Diskon 10%');
     }
 }

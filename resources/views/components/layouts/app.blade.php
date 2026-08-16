@@ -8,15 +8,22 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-background text-on-background font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+@php
+  $announcementActive = \App\Models\Setting::get('announcement_active', '1') === '1';
+  $announcementText = \App\Models\Setting::get('announcement_text', '🍞 Freshly Baked Everyday · 🚚 Gratis Ongkos Kirim · Gunakan Kupon FERSYA10 untuk Diskon 10%');
+@endphp
+
+@if ($announcementActive && !empty($announcementText))
 <div id="announcement-bar" class="bg-primary text-on-primary text-xs py-2.5 px-4 text-center font-bold tracking-wide flex justify-between items-center transition-all">
 <div class="w-6 hidden sm:block"></div>
 <div class="flex-1 text-center">
-  <span>🍞 Freshly Baked Everyday &nbsp;·&nbsp; 🚚 Gratis Ongkos Kirim &nbsp;·&nbsp; Gunakan Kupon <span class="bg-on-primary text-primary px-2 py-0.5 rounded font-extrabold">FERSYA10</span> untuk Diskon 10%</span>
+  <span>{!! $announcementText !!}</span>
 </div>
 <button onclick="document.getElementById('announcement-bar').style.display='none'" class="text-on-primary hover:opacity-75 focus:outline-none">
   <span class="material-symbols-outlined text-sm block">close</span>
 </button>
 </div>
+@endif
 <header class="bg-surface sticky top-0 z-50 w-full transition-all duration-300">
 <div class="flex justify-between items-center w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 h-20">
 <a href="{{ route('home') }}" class="font-headline-md text-headline-md text-primary tracking-tight">Fersya Shop</a>
