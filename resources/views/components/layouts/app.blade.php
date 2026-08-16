@@ -16,6 +16,7 @@
 <a class="{{ request('kategori') === 'roti-gandum' ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-secondary hover:text-primary transition-colors duration-200' }} font-body-md text-body-md" href="{{ route('katalog.index', ['kategori' => 'roti-gandum']) }}">Artisan Bread</a>
 <a class="{{ request('kategori') === 'kopi' ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-secondary hover:text-primary transition-colors duration-200' }} font-body-md text-body-md" href="{{ route('katalog.index', ['kategori' => 'kopi']) }}">Organic Coffee</a>
 <a class="{{ request('kategori') === 'teh-herbal' ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-secondary hover:text-primary transition-colors duration-200' }} font-body-md text-body-md" href="{{ route('katalog.index', ['kategori' => 'teh-herbal']) }}">Herbal Tea</a>
+<a class="{{ request()->routeIs('orders.search') ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-secondary hover:text-primary transition-colors duration-200' }} font-body-md text-body-md flex items-center gap-1" href="{{ route('orders.search') }}"><span class="material-symbols-outlined text-lg">search</span> Cek Pesanan</a>
 </nav>
 <div class="flex items-center space-x-6">
 <a href="{{ route('cart.index') }}" class="text-primary hover:opacity-80 transition-opacity flex items-center relative">
@@ -45,6 +46,7 @@
 <a class="text-on-surface-variant hover:text-primary transition-colors text-lg" href="{{ route('katalog.index', ['kategori' => 'roti-gandum']) }}">Artisan Bread</a>
 <a class="text-on-surface-variant hover:text-primary transition-colors text-lg" href="{{ route('katalog.index', ['kategori' => 'kopi']) }}">Organic Coffee</a>
 <a class="text-on-surface-variant hover:text-primary transition-colors text-lg" href="{{ route('katalog.index', ['kategori' => 'teh-herbal']) }}">Herbal Tea</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-lg flex items-center gap-2" href="{{ route('orders.search') }}"><span class="material-symbols-outlined text-xl">search</span> Cek Status Pesanan</a>
 </nav>
 </div>
 <div class="border-t border-outline-variant pt-6">
@@ -72,6 +74,7 @@
 <h5 class="text-primary font-bold font-body-md mb-6">Explore</h5>
 <ul class="space-y-4">
 <li><a class="text-on-secondary-container hover:text-primary transition-colors font-body-md" href="{{ route('katalog.index') }}">Shop All</a></li>
+<li><a class="text-on-secondary-container hover:text-primary transition-colors font-body-md" href="{{ route('orders.search') }}">Cek Status Pesanan</a></li>
 <li><a class="text-on-secondary-container hover:text-primary transition-colors font-body-md" href="{{ route('katalog.index', ['kategori' => 'roti-gandum']) }}">Artisan Bread</a></li>
 <li><a class="text-on-secondary-container hover:text-primary transition-colors font-body-md" href="{{ route('katalog.index', ['kategori' => 'kopi']) }}">Organic Coffee</a></li>
 <li><a class="text-on-secondary-container hover:text-primary transition-colors font-body-md" href="{{ route('katalog.index', ['kategori' => 'teh-herbal']) }}">Herbal Tea</a></li>

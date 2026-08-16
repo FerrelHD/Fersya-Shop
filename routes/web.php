@@ -26,5 +26,6 @@ Route::delete('/keranjang/{variant}', [CartController::class, 'destroy'])->name(
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
+Route::get('/cek-pesanan', [OrderController::class, 'search'])->name('orders.search');
 Route::get('/pesanan/{order:order_number}', [OrderController::class, 'show'])->name('orders.show');
 Route::post('/pesanan/{order:order_number}/simulasi-bayar', [MidtransWebhookController::class, 'handle'])->name('midtrans.simulate');
