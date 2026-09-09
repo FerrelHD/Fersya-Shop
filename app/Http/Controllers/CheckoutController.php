@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\ProductVariant;
 use App\Support\Cart;
 use App\Support\ShippingCalculator;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -47,52 +49,65 @@ class CheckoutController extends Controller
             'postal_code' => ['required', 'string', 'max:10'],
         ]);
 
-        // Verify stock for all items
-        foreach ($items as $item) {
-            if ($item['variant']->stock < $item['quantity']) {
-                return back()->withErrors([
-                    'stock' => "Stok untuk {$item['variant']->product->name} ({$item['variant']->name}) tidak mencukupi. Tersisa {$item['variant']->stock} pcs."
-                ])->withInput();
-            }
-        }
-
         $shippingCost = ShippingCalculator::estimate($data['city']);
         $subtotal = Cart::total();
         $discount = Cart::discount();
         $coupon = Cart::coupon();
 
-        $order = Order::create([
-            'guest_name' => $data['guest_name'],
-            'guest_phone' => $data['guest_phone'],
-            'guest_email' => $data['guest_email'] ?? null,
-            'order_number' => 'FS-'.strtoupper(Str::random(8)),
-            'total_amount' => max(0, $subtotal + $shippingCost - $discount),
-            'shipping_cost' => $shippingCost,
-            'discount_amount' => $discount,
-            'coupon_code' => $coupon?->code,
-            'payment_status' => 'pending',
-            'shipping_status' => 'menunggu_pembayaran',
-        ]);
+        try {
+            $order = DB::transaction(function () use ($data, $items, $shippingCost, $subtotal, $discount, $coupon) {
+                // Verifikasi stok dengan lock untuk mencegah race condition
+                foreach ($items as $item) {
+                    $variant = ProductVariant::where('id', $item['variant']->id)
+                        ->lockForUpdate()
+                        ->first();
 
-        foreach ($items as $item) {
-            $order->items()->create([
-                'product_variant_id' => $item['variant']->id,
-                'quantity' => $item['quantity'],
-                'price' => $item['variant']->price(),
-            ]);
+                    if (! $variant || $variant->stock < $item['quantity']) {
+                        $productName = $variant?->product?->name ?? 'Produk';
+                        $variantName = $variant?->name ?? '';
+                        $remaining = $variant?->stock ?? 0;
+                        throw new \RuntimeException("Stok untuk {$productName} ({$variantName}) tidak mencukupi. Tersisa {$remaining} pcs.");
+                    }
+                }
 
-            // Decrement variant stock automatically
-            $item['variant']->decrement('stock', $item['quantity']);
+                $order = Order::create([
+                    'guest_name' => $data['guest_name'],
+                    'guest_phone' => $data['guest_phone'],
+                    'guest_email' => $data['guest_email'] ?? null,
+                    'order_number' => 'FS-'.strtoupper(Str::random(8)),
+                    'total_amount' => max(0, $subtotal + $shippingCost - $discount),
+                    'shipping_cost' => $shippingCost,
+                    'discount_amount' => $discount,
+                    'coupon_code' => $coupon?->code,
+                    'payment_status' => 'pending',
+                    'shipping_status' => 'menunggu_pembayaran',
+                ]);
+
+                foreach ($items as $item) {
+                    $order->items()->create([
+                        'product_variant_id' => $item['variant']->id,
+                        'quantity' => $item['quantity'],
+                        'price' => $item['variant']->price(),
+                    ]);
+
+                    ProductVariant::where('id', $item['variant']->id)
+                        ->decrement('stock', $item['quantity']);
+                }
+
+                $order->shippingAddress()->create([
+                    'recipient_name' => $data['guest_name'],
+                    'phone' => $data['guest_phone'],
+                    'address' => $data['address'],
+                    'city' => $data['city'],
+                    'province' => $data['province'],
+                    'postal_code' => $data['postal_code'],
+                ]);
+
+                return $order;
+            });
+        } catch (\RuntimeException $e) {
+            return back()->withErrors(['stock' => $e->getMessage()])->withInput();
         }
-
-        $order->shippingAddress()->create([
-            'recipient_name' => $data['guest_name'],
-            'phone' => $data['guest_phone'],
-            'address' => $data['address'],
-            'city' => $data['city'],
-            'province' => $data['province'],
-            'postal_code' => $data['postal_code'],
-        ]);
 
         Cart::clear();
 

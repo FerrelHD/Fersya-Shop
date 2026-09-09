@@ -28,12 +28,14 @@ class OrderController extends Controller
             }
 
             $cleanPhone = preg_replace('/[^0-9]/', '', $query);
-            $orders = Order::where('order_number', 'like', "%{$query}%")
-                ->orWhere('guest_phone', 'like', "%{$cleanPhone}%")
-                ->orWhere('guest_name', 'like', "%{$query}%")
-                ->with(['items.variant.product'])
-                ->latest()
-                ->get();
+            // Hanya izinkan pencarian no telepon jika format nomor valid (minimal 10 digit) dan cocok persis
+            if (strlen($cleanPhone) >= 10) {
+                $orders = Order::where('guest_phone', $cleanPhone)
+                    ->orWhere('guest_phone', $query)
+                    ->with(['items.variant.product'])
+                    ->latest()
+                    ->get();
+            }
         }
 
         return view('orders.search', [

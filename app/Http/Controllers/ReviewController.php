@@ -26,11 +26,15 @@ class ReviewController extends Controller
             return back()->with('review_status', 'Nomor pesanan tidak ditemukan atau belum selesai.');
         }
 
-        $product->reviews()->create([
-            'order_id' => $order->id,
-            'rating' => $data['rating'],
-            'comment' => $data['comment'] ?? null,
-        ]);
+        if ($product->reviews()->where('order_id', $order->id)->exists()) {
+    return back()->with('review_status', 'Anda sudah memberikan ulasan untuk pesanan ini.');
+}
+
+$product->reviews()->create([
+    'order_id' => $order->id,
+    'rating' => $data['rating'],
+    'comment' => $data['comment'] ?? null,
+]);
 
         return back()->with('review_status', 'Terima kasih atas ulasannya!');
     }

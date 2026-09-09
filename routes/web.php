@@ -15,18 +15,18 @@ Route::get('/', fn () => view('home', [
 
 Route::get('/katalog', [CatalogController::class, 'index'])->name('katalog.index');
 Route::get('/produk/{product}', [ProductController::class, 'show'])->name('products.show');
-Route::post('/produk/{product}/ulasan', [ReviewController::class, 'store'])->name('reviews.store');
+Route::post('/produk/{product}/ulasan', [ReviewController::class, 'store'])->middleware('throttle:5,1')->name('reviews.store');
 
 Route::get('/keranjang', [CartController::class, 'index'])->name('cart.index');
 Route::post('/keranjang', [CartController::class, 'store'])->name('cart.store');
 Route::patch('/keranjang/{variant}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/keranjang/{variant}', [CartController::class, 'destroy'])->name('cart.destroy');
-Route::post('/kupon', [CartController::class, 'applyCoupon'])->name('coupon.apply');
+Route::post('/kupon', [CartController::class, 'applyCoupon'])->middleware('throttle:15,1')->name('coupon.apply');
 Route::delete('/kupon', [CartController::class, 'removeCoupon'])->name('coupon.remove');
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+Route::post('/checkout', [CheckoutController::class, 'store'])->middleware('throttle:10,1')->name('checkout.store');
 
-Route::get('/cek-pesanan', [OrderController::class, 'search'])->name('orders.search');
+Route::get('/cek-pesanan', [OrderController::class, 'search'])->middleware('throttle:30,1')->name('orders.search');
 Route::get('/pesanan/{order:order_number}', [OrderController::class, 'show'])->name('orders.show');
 Route::get('/pesanan/{order:order_number}/invoice', [OrderController::class, 'invoice'])->name('orders.invoice');
