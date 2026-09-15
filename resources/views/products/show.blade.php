@@ -1,9 +1,42 @@
-<x-layouts.app :title="$product->name . ' | Fersya Shop'">
+<x-layouts.app
+    :title="$product->name . ' | Fersya Shop'"
+    :description="Illuminate\Support\Str::limit($product->description, 155)"
+    :ogImage="asset($product->primaryImage()?->image_path ?? 'images/bread.png')"
+>
+@push('head')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "{{ $product->name }}",
+  "description": "{{ $product->description }}",
+  "image": "{{ asset($product->primaryImage()?->image_path ?? 'images/bread.png') }}",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "IDR",
+    "price": "{{ $product->base_price }}",
+    "availability": "{{ $product->variants->sum('stock') > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' }}"
+  }
+  @if($product->reviews->count() > 0)
+  ,"aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ round($product->reviews->avg('rating'), 1) }}",
+    "reviewCount": "{{ $product->reviews->count() }}"
+  }
+  @endif
+}
+</script>
+@endpush
 <section class="px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto py-16">
 <div class="flex flex-col md:flex-row gap-8 md:gap-16">
 <div class="w-full md:w-1/2">
 <div class="aspect-square rounded-2xl overflow-hidden bg-surface-container">
-<div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ asset($product->primaryImage()?->image_path ?? 'images/bread.png') }}')"></div>
+<img
+    src="{{ asset($product->primaryImage()?->image_path ?? 'images/bread.png') }}"
+    alt="{{ $product->name }} — Fersya Shop"
+    class="w-full h-full object-cover"
+    loading="lazy"
+>
 </div>
 </div>
 <div class="w-full md:w-1/2">

@@ -9,8 +9,13 @@ use Illuminate\View\View;
 
 class OrderController extends Controller
 {
-    public function show(Order $order): View
+    public function show(Order $order): View|RedirectResponse
     {
+        if (! in_array($order->order_number, session('accessible_orders', []))) {
+            return redirect()->route('orders.search')
+                ->with('info', 'Masukkan nomor pesanan atau nomor WhatsApp untuk melihat detail pesanan.');
+        }
+
         $order->load(['items.variant.product', 'shippingAddress']);
 
         return view('orders.show', ['order' => $order]);
@@ -24,17 +29,23 @@ class OrderController extends Controller
         if ($query !== '') {
             $exactOrder = Order::where('order_number', strtoupper($query))->first();
             if ($exactOrder) {
+                // Beri akses session agar bisa lihat detail
+                session()->push('accessible_orders', $exactOrder->order_number);
                 return redirect()->route('orders.show', $exactOrder);
             }
 
             $cleanPhone = preg_replace('/[^0-9]/', '', $query);
-            // Hanya izinkan pencarian no telepon jika format nomor valid (minimal 10 digit) dan cocok persis
             if (strlen($cleanPhone) >= 10) {
                 $orders = Order::where('guest_phone', $cleanPhone)
                     ->orWhere('guest_phone', $query)
                     ->with(['items.variant.product'])
                     ->latest()
                     ->get();
+
+                // Beri akses session untuk semua pesanan yang ditemukan via nomor HP
+                foreach ($orders as $found) {
+                    session()->push('accessible_orders', $found->order_number);
+                }
             }
         }
 
@@ -44,8 +55,13 @@ class OrderController extends Controller
         ]);
     }
 
-    public function invoice(Order $order): View
+    public function invoice(Order $order): View|RedirectResponse
     {
+        if (! in_array($order->order_number, session('accessible_orders', []))) {
+            return redirect()->route('orders.search')
+                ->with('info', 'Masukkan nomor pesanan atau nomor WhatsApp untuk melihat invoice.');
+        }
+
         $order->load(['items.variant.product', 'shippingAddress']);
 
         return view('orders.invoice', ['order' => $order]);

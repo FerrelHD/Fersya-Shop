@@ -62,7 +62,9 @@ class CouponAndInvoiceTest extends TestCase
             'shipping_status' => 'diproses',
         ]);
 
-        $response = $this->get(route('orders.invoice', $order));
+        // Invoice hanya bisa diakses dengan session yang valid
+        $response = $this->withSession(['accessible_orders' => ['FS-TESTINV1']])
+            ->get(route('orders.invoice', $order));
         $response->assertStatus(200);
         $response->assertSee('INVOICE');
         $response->assertSee('FS-TESTINV1');

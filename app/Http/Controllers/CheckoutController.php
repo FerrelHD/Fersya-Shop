@@ -111,6 +111,9 @@ class CheckoutController extends Controller
 
         Cart::clear();
 
+        // Izinkan akses ke halaman detail pesanan ini dari session
+        session()->push('accessible_orders', $order->order_number);
+
         if ($order->guest_email) {
             try {
                 \Illuminate\Support\Facades\Mail::to($order->guest_email)->send(new \App\Mail\OrderCreatedMail($order));

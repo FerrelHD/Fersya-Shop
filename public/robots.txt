@@ -1,2 +1,8 @@
 User-agent: *
-Disallow:
+Disallow: /keranjang
+Disallow: /checkout
+Disallow: /pesanan/
+Disallow: /admin/
+Allow: /
+
+Sitemap: https://fersya.com/sitemap.xml

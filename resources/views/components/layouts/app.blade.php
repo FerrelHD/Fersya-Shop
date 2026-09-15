@@ -4,20 +4,29 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>{{ $title ?? 'Fersya Shop' }}</title>
+<meta name="description" content="{{ $description ?? 'Toko roti gandum artisan, kopi organik pilihan, dan teh herbal premium. Dipilih langsung dari petani lokal Indonesia.' }}">
+<meta property="og:title" content="{{ $title ?? 'Fersya Shop' }}">
+<meta property="og:description" content="{{ $description ?? 'Toko roti gandum artisan, kopi organik pilihan, dan teh herbal premium.' }}">
+<meta property="og:image" content="{{ isset($ogImage) ? $ogImage : asset('images/hero.png') }}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="id_ID">
+<link rel="canonical" href="{{ url()->current() }}">
+<meta name="robots" content="index, follow">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 @vite(['resources/css/app.css', 'resources/js/app.js'])
+@stack('head')
 </head>
 <body class="bg-background text-on-background font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
 @php
-  $announcementActive = \App\Models\Setting::get('announcement_active', '1') === '1';
-  $announcementText = \App\Models\Setting::get('announcement_text', '🍞 Freshly Baked Everyday · 🚚 Gratis Ongkos Kirim · Gunakan Kupon FERSYA10 untuk Diskon 10%');
+  $announcementActive = \Illuminate\Support\Facades\Cache::remember('setting.announcement_active', 300, fn() => \App\Models\Setting::get('announcement_active', '1'));
+  $announcementText = \Illuminate\Support\Facades\Cache::remember('setting.announcement_text', 300, fn() => \App\Models\Setting::get('announcement_text', '🍞 Freshly Baked Everyday · 🚚 Gratis Ongkos Kirim · Gunakan Kupon FERSYA10 untuk Diskon 10%'));
 @endphp
 
 @if ($announcementActive && !empty($announcementText))
 <div id="announcement-bar" class="bg-primary text-on-primary text-xs py-2.5 px-4 text-center font-bold tracking-wide flex justify-between items-center transition-all">
 <div class="w-6 hidden sm:block"></div>
 <div class="flex-1 text-center">
-  <span>{!! $announcementText !!}</span>
+  <span>{{ $announcementText }}</span>
 </div>
 <button onclick="document.getElementById('announcement-bar').style.display='none'" class="text-on-primary hover:opacity-75 focus:outline-none">
   <span class="material-symbols-outlined text-sm block">close</span>
@@ -75,6 +84,11 @@
 </header>
 
 <main>
+@if (session('info'))
+<div class="bg-primary-fixed text-on-primary-fixed text-sm px-4 py-3 text-center font-body-md">
+  {{ session('info') }}
+</div>
+@endif
 {{ $slot }}
 </main>
 
@@ -105,11 +119,16 @@
 </div>
 <div>
 <h5 class="text-primary font-bold font-body-md mb-6">Newsletter</h5>
-<form id="newsletter-form" class="flex border-b border-outline pb-2 group focus-within:border-primary">
-<input class="bg-transparent border-none focus:ring-0 w-full p-0 text-sm focus:outline-none" placeholder="Email Address" type="email" required/>
-<button class="text-primary" type="submit"><span class="material-symbols-outlined">east</span></button>
+<form method="POST" action="{{ route('newsletter.store') }}" class="flex border-b border-outline pb-2 group focus-within:border-primary">
+  @csrf
+  <input class="bg-transparent border-none focus:ring-0 w-full p-0 text-sm focus:outline-none" placeholder="Email Address" type="email" name="email" required/>
+  <button class="text-primary" type="submit"><span class="material-symbols-outlined">east</span></button>
 </form>
-<p id="newsletter-status" class="text-xs text-primary font-bold mt-2 hidden">Terima kasih! Email Anda berhasil terdaftar.</p>
+@if (session('newsletter_success'))
+<p class="text-xs text-primary font-bold mt-2">{{ session('newsletter_success') }}</p>
+@else
+<p class="text-xs text-on-secondary-container mt-2">Dapatkan promo eksklusif langsung ke inbox Anda.</p>
+@endif
 </div>
 </div>
 </footer>
@@ -158,16 +177,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btn) btn.addEventListener('click', openDrawer);
     if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
     if (overlay) overlay.addEventListener('click', closeDrawer);
-
-    const newsletterForm = document.getElementById('newsletter-form');
-    const newsletterStatus = document.getElementById('newsletter-status');
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            newsletterStatus.classList.remove('hidden');
-            newsletterForm.reset();
-        });
-    }
 });
 
 function toggleModal(modalId) {

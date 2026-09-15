@@ -106,4 +106,31 @@ class SecurityTest extends TestCase
         $response = $this->post(route('coupon.apply'), ['code' => 'FAKE16']);
         $response->assertStatus(429);
     }
+
+    public function test_order_detail_requires_session_access(): void
+    {
+        $order = Order::create([
+            'guest_name'      => 'Test User',
+            'guest_phone'     => '081200001111',
+            'order_number'    => 'FS-SESSTEST',
+            'total_amount'    => 50000,
+            'shipping_cost'   => 0,
+            'payment_status'  => 'pending',
+            'shipping_status' => 'menunggu_pembayaran',
+        ]);
+
+        // Akses langsung tanpa session → harus redirect ke cek-pesanan
+        $this->get(route('orders.show', 'FS-SESSTEST'))
+             ->assertRedirect(route('orders.search'));
+
+        // Akses dengan session yang benar → harus tampil 200
+        $this->withSession(['accessible_orders' => ['FS-SESSTEST']])
+             ->get(route('orders.show', 'FS-SESSTEST'))
+             ->assertStatus(200);
+
+        // Invoice juga harus dilindungi (fresh request, tanpa session)
+        $this->flushSession();
+        $this->get(route('orders.invoice', 'FS-SESSTEST'))
+             ->assertRedirect(route('orders.search'));
+    }
 }

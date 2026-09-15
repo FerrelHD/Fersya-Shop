@@ -1,4 +1,7 @@
-<x-layouts.app title="Fersya Shop | Hidup Sehat, Disederhanakan">
+<x-layouts.app
+    title="Fersya Shop | Hidup Sehat, Disederhanakan"
+    description="Roti gandum artisan, kopi organik pilihan, dan teh herbal premium. Dipilih langsung dari petani lokal Indonesia. Gratis ongkos kirim ke seluruh Indonesia."
+>
 <!-- Hero Section (Full Background) -->
 <section class="relative min-h-[75vh] lg:min-h-[85vh] flex items-center overflow-hidden bg-surface-container-low">
 <!-- Background Image -->
