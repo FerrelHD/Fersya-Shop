@@ -80,7 +80,7 @@
 
 <!-- Pembayaran QRIS / WA & Ringkasan -->
 <div class="lg:col-span-5 space-y-6">
-<div class="bg-surface p-8 rounded-2xl ambient-shadow">
+<div class="bg-surface p-5 sm:p-8 rounded-2xl ambient-shadow">
 <h2 class="font-headline-md text-xl text-primary font-bold mb-4">Ringkasan Total</h2>
 <div class="space-y-2 text-sm">
 <div class="flex justify-between text-on-surface-variant"><span>Ongkos Kirim</span><span class="text-primary font-bold">GRATIS</span></div>
@@ -106,7 +106,7 @@ $waUrl = "https://wa.me/6281321686115?text={$waText}";
 <div class="mt-8 pt-6 border-t border-outline-variant text-center">
 <span class="text-xs font-bold text-primary uppercase tracking-widest block mb-3">Scan QRIS Untuk Pembayaran</span>
 <div class="bg-white p-4 rounded-2xl border border-outline-variant inline-block shadow-sm mb-4">
-<img src="{{ asset('images/qris.png') }}" alt="QRIS Fersya Shop" class="w-56 h-56 mx-auto object-contain"/>
+<img src="{{ asset('images/qris.png') }}" alt="QRIS Fersya Shop" class="w-44 h-44 sm:w-56 sm:h-56 mx-auto object-contain"/>
 </div>
 <p class="text-xs text-on-surface-variant mb-6">Mendukung GoPay, OVO, Dana, ShopeePay, LinkAja, & Semua Bank Transfer (BCA, Mandiri, BRI, BNI).</p>
 

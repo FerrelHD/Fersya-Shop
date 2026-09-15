@@ -5,17 +5,17 @@
 <form method="POST" action="{{ route('checkout.store') }}" class="w-full md:w-2/3 space-y-6">
 @csrf
 <h2 class="font-headline-md text-body-lg text-primary mb-2">Data Penerima</h2>
-<input type="text" name="guest_name" value="{{ old('guest_name') }}" placeholder="Nama Lengkap" required class="w-full border border-outline rounded-lg py-3 px-4"/>
-<input type="text" name="guest_phone" value="{{ old('guest_phone') }}" placeholder="Nomor WhatsApp" required class="w-full border border-outline rounded-lg py-3 px-4"/>
-<input type="email" name="guest_email" value="{{ old('guest_email') }}" placeholder="Email (opsional)" class="w-full border border-outline rounded-lg py-3 px-4"/>
+<input type="text" name="guest_name" value="{{ old('guest_name') }}" placeholder="Nama Lengkap" required class="w-full border border-outline rounded-lg py-3 px-4 text-base"/>
+<input type="text" name="guest_phone" value="{{ old('guest_phone') }}" placeholder="Nomor WhatsApp" required class="w-full border border-outline rounded-lg py-3 px-4 text-base"/>
+<input type="email" name="guest_email" value="{{ old('guest_email') }}" placeholder="Email (opsional)" class="w-full border border-outline rounded-lg py-3 px-4 text-base"/>
 
 <h2 class="font-headline-md text-body-lg text-primary mb-2 pt-4">Alamat Pengiriman</h2>
-<textarea name="address" placeholder="Alamat lengkap" required rows="3" class="w-full border border-outline rounded-lg py-3 px-4">{{ old('address') }}</textarea>
-<div class="grid grid-cols-2 gap-4">
-<input type="text" name="city" value="{{ old('city') }}" placeholder="Kota" required class="border border-outline rounded-lg py-3 px-4"/>
-<input type="text" name="province" value="{{ old('province') }}" placeholder="Provinsi" required class="border border-outline rounded-lg py-3 px-4"/>
+<textarea name="address" placeholder="Alamat lengkap" required rows="3" class="w-full border border-outline rounded-lg py-3 px-4 text-base">{{ old('address') }}</textarea>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<input type="text" name="city" value="{{ old('city') }}" placeholder="Kota" required class="border border-outline rounded-lg py-3 px-4 text-base w-full"/>
+<input type="text" name="province" value="{{ old('province') }}" placeholder="Provinsi" required class="border border-outline rounded-lg py-3 px-4 text-base w-full"/>
 </div>
-<input type="text" name="postal_code" value="{{ old('postal_code') }}" placeholder="Kode Pos" required class="w-full border border-outline rounded-lg py-3 px-4"/>
+<input type="text" name="postal_code" value="{{ old('postal_code') }}" placeholder="Kode Pos" required class="w-full border border-outline rounded-lg py-3 px-4 text-base"/>
 
 @if ($errors->any())
 <div class="text-error font-body-md">
@@ -30,7 +30,7 @@
 <button type="submit" class="bg-primary text-on-primary px-10 py-5 rounded-lg w-full">Buat Pesanan</button>
 </form>
 
-<div class="w-full md:w-1/3 bg-surface-container-low p-6 md:p-8 rounded-2xl h-fit">
+<div class="w-full md:w-1/3 bg-surface-container-low p-6 md:p-8 rounded-2xl h-fit md:sticky md:top-8">
 <h2 class="font-headline-md text-body-lg text-primary mb-6">Ringkasan Pesanan</h2>
 @foreach ($items as $item)
 <div class="flex justify-between font-body-md mb-3 gap-2">

@@ -153,9 +153,9 @@
 <p class="text-on-surface-variant font-body-md mb-6">Masukkan nomor pesanan Anda untuk memberikan ulasan.</p>
 <form method="POST" action="{{ route('reviews.store', $product) }}" class="space-y-4">
 @csrf
-<input type="text" name="order_number" value="{{ request('order', old('order_number')) }}" placeholder="Nomor pesanan (contoh: FS-XXXXXXXX)" required class="w-full border border-outline rounded-xl py-3 px-4 font-body-md text-sm focus:border-primary focus:ring-0 focus:outline-none transition-colors bg-surface-container-low"/>
+<input type="text" name="order_number" value="{{ request('order', old('order_number')) }}" placeholder="Nomor pesanan (contoh: FS-XXXXXXXX)" required class="w-full border border-outline rounded-xl py-3 px-4 font-body-md text-base focus:border-primary focus:ring-0 focus:outline-none transition-colors bg-surface-container-low"/>
 <div class="relative">
-<select name="rating" required class="w-full border border-outline rounded-xl py-3 pl-4 pr-10 font-body-md text-sm text-primary focus:border-primary focus:ring-0 focus:outline-none transition-colors bg-surface-container-low appearance-none cursor-pointer">
+<select name="rating" required class="w-full border border-outline rounded-xl py-3 pl-4 pr-10 font-body-md text-base text-primary focus:border-primary focus:ring-0 focus:outline-none transition-colors bg-surface-container-low appearance-none cursor-pointer">
 <option value="5">⭐⭐⭐⭐⭐ — Sangat Puas</option>
 <option value="4">⭐⭐⭐⭐ — Puas</option>
 <option value="3">⭐⭐⭐ — Cukup</option>
@@ -164,7 +164,7 @@
 </select>
 <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-base">expand_more</span>
 </div>
-<textarea name="comment" placeholder="Ceritakan pengalamanmu dengan produk ini..." rows="3" class="w-full border border-outline rounded-xl py-3 px-4 font-body-md text-sm focus:border-primary focus:ring-0 focus:outline-none transition-colors bg-surface-container-low resize-none"></textarea>
+<textarea name="comment" placeholder="Ceritakan pengalamanmu dengan produk ini..." rows="3" class="w-full border border-outline rounded-xl py-3 px-4 font-body-md text-base focus:border-primary focus:ring-0 focus:outline-none transition-colors bg-surface-container-low resize-none"></textarea>
 <button type="submit" class="bg-primary text-on-primary px-8 py-3 rounded-xl font-bold hover:bg-opacity-90 transition-all w-full sm:w-auto">Kirim Ulasan</button>
 </form>
 </div>

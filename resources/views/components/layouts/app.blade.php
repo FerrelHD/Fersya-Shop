@@ -93,7 +93,7 @@
 </main>
 
 <footer class="bg-surface-container-low w-full py-section-gap">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-grid-gutter px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-grid-gutter px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
 <div class="md:col-span-1">
 <div class="font-headline-md text-headline-md text-primary mb-6">Fersya Shop</div>
 <p class="text-on-secondary-container font-body-md leading-relaxed mb-6">
@@ -121,7 +121,7 @@
 <h5 class="text-primary font-bold font-body-md mb-6">Newsletter</h5>
 <form method="POST" action="{{ route('newsletter.store') }}" class="flex border-b border-outline pb-2 group focus-within:border-primary">
   @csrf
-  <input class="bg-transparent border-none focus:ring-0 w-full p-0 text-sm focus:outline-none" placeholder="Email Address" type="email" name="email" required/>
+  <input class="bg-transparent border-none focus:ring-0 w-full p-0 text-base focus:outline-none" placeholder="Email Address" type="email" name="email" required/>
   <button class="text-primary" type="submit"><span class="material-symbols-outlined">east</span></button>
 </form>
 @if (session('newsletter_success'))

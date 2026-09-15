@@ -58,7 +58,7 @@
 @else
 <form method="POST" action="{{ route('coupon.apply') }}" class="flex gap-2 w-full sm:w-auto">
 @csrf
-<input type="text" name="code" placeholder="Kode promo (contoh: FERSYA10)" required class="uppercase border border-outline rounded-full px-5 py-2.5 text-xs font-semibold text-primary placeholder:normal-case placeholder:text-xs placeholder:text-on-surface-variant/50 focus:border-primary focus:ring-0 shadow-sm"/>
+<input type="text" name="code" placeholder="Kode promo (contoh: FERSYA10)" required class="uppercase border border-outline rounded-full px-5 py-2.5 text-base font-semibold text-primary placeholder:normal-case placeholder:text-sm placeholder:text-on-surface-variant/50 focus:border-primary focus:ring-0 shadow-sm"/>
 <button type="submit" class="bg-primary text-on-primary font-bold px-6 py-2.5 rounded-full text-xs hover:bg-opacity-90 transition-all shadow-sm">Gunakan</button>
 </form>
 @endif
