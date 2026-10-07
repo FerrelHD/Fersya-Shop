@@ -63,7 +63,7 @@
     <div class="detail-box">
       <h4>Penerima Pesanan</h4>
       <p>
-        {{ $order->guest_name }} ({{ $order->guest_phone }})<br>
+        {{ $order->guest_name }} ({{ substr($order->guest_phone, 0, 4) . '****' . substr($order->guest_phone, -3) }})<br>
         {{ $order->shippingAddress?->address }}<br>
         {{ $order->shippingAddress?->city }}, {{ $order->shippingAddress?->province }} {{ $order->shippingAddress?->postal_code }}
       </p>

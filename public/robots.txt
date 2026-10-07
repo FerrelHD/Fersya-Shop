@@ -2,6 +2,7 @@ User-agent: *
 Disallow: /keranjang
 Disallow: /checkout
 Disallow: /pesanan/
+Disallow: /cek-pesanan
 Disallow: /admin/
 Allow: /
 

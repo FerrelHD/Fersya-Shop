@@ -62,7 +62,7 @@
 <div class="bg-surface p-6 rounded-2xl ambient-shadow">
 <h3 class="font-headline-md text-lg text-primary font-bold mb-3">Alamat Pengiriman</h3>
 <p class="text-on-surface-variant text-sm leading-relaxed">
-<strong class="text-primary">{{ $order->shippingAddress->recipient_name }}</strong> ({{ $order->shippingAddress->phone }})<br>
+<strong class="text-primary">{{ $order->shippingAddress->recipient_name }}</strong> ({{ substr($order->shippingAddress->phone, 0, 4) . '****' . substr($order->shippingAddress->phone, -3) }})<br>
 {{ $order->shippingAddress->address }}<br>
 {{ $order->shippingAddress->city }}, {{ $order->shippingAddress->province }} {{ $order->shippingAddress->postal_code }}
 </p>

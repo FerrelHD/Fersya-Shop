@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderCreatedMail;
 use App\Models\Order;
 use App\Models\ProductVariant;
 use App\Support\Cart;
@@ -9,6 +10,8 @@ use App\Support\ShippingCalculator;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -116,9 +119,9 @@ class CheckoutController extends Controller
 
         if ($order->guest_email) {
             try {
-                \Illuminate\Support\Facades\Mail::to($order->guest_email)->send(new \App\Mail\OrderCreatedMail($order));
+                Mail::to($order->guest_email)->send(new OrderCreatedMail($order));
             } catch (\Throwable $e) {
-                \Illuminate\Support\Facades\Log::error('Gagal mengirim email pesanan: ' . $e->getMessage());
+                Log::error('Gagal mengirim email pesanan: '.$e->getMessage());
             }
         }
 

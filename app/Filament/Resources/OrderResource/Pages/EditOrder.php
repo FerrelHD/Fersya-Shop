@@ -4,6 +4,7 @@ namespace App\Filament\Resources\OrderResource\Pages;
 
 use App\Filament\Resources\OrderResource;
 use App\Mail\OrderShippedMail;
+use App\Models\Order;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Facades\Log;
@@ -22,14 +23,14 @@ class EditOrder extends EditRecord
 
     protected function afterSave(): void
     {
-        /** @var \App\Models\Order $order */
+        /** @var Order $order */
         $order = $this->record;
 
         if ($order->guest_email && $order->shipping_status === 'dikirim') {
             try {
                 Mail::to($order->guest_email)->send(new OrderShippedMail($order));
             } catch (\Throwable $e) {
-                Log::error('Gagal mengirim email resi pengiriman: ' . $e->getMessage());
+                Log::error('Gagal mengirim email resi pengiriman: '.$e->getMessage());
             }
         }
     }

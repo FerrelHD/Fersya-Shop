@@ -15,9 +15,13 @@ class CouponResource extends Resource
     protected static ?string $model = Coupon::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-ticket';
+
     protected static ?string $navigationLabel = 'Kupon & Promo';
+
     protected static ?string $modelLabel = 'Kupon Diskon';
+
     protected static ?string $pluralModelLabel = 'Kupon Diskon';
+
     protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
@@ -67,7 +71,7 @@ class CouponResource extends Resource
                     ->formatStateUsing(fn (string $state): string => $state === 'percent' ? 'Persentase (%)' : 'Nominal Tetap (Rp)'),
                 Tables\Columns\TextColumn::make('value')
                     ->label('Nilai')
-                    ->formatStateUsing(fn ($record) => $record->type === 'percent' ? "{$record->value}%" : "Rp " . number_format($record->value, 0, ',', '.')),
+                    ->formatStateUsing(fn ($record) => $record->type === 'percent' ? "{$record->value}%" : 'Rp '.number_format($record->value, 0, ',', '.')),
                 Tables\Columns\TextColumn::make('min_spend')
                     ->label('Min. Belanja')
                     ->money('IDR'),

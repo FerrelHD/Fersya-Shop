@@ -14,7 +14,7 @@ class ReviewController extends Controller
         $data = $request->validate([
             'order_number' => ['required', 'string'],
             'rating' => ['required', 'integer', 'min:1', 'max:5'],
-            'comment' => ['nullable', 'string'],
+            'comment' => ['nullable', 'string', 'max:1000'],
         ]);
 
         $order = Order::where('order_number', $data['order_number'])
@@ -27,15 +27,16 @@ class ReviewController extends Controller
         }
 
         if ($product->reviews()->where('order_id', $order->id)->exists()) {
-    return back()->with('review_status', 'Anda sudah memberikan ulasan untuk pesanan ini.');
-}
+            return back()->with('review_status', 'Anda sudah memberikan ulasan untuk pesanan ini.');
+        }
 
-$product->reviews()->create([
-    'order_id' => $order->id,
-    'rating' => $data['rating'],
-    'comment' => $data['comment'] ?? null,
-]);
+        $product->reviews()->create([
+            'order_id' => $order->id,
+            'rating' => $data['rating'],
+            'comment' => $data['comment'] ?? null,
+            'is_approved' => false,
+        ]);
 
-        return back()->with('review_status', 'Terima kasih atas ulasannya!');
+        return back()->with('review_status', 'Terima kasih atas ulasan Anda! Ulasan akan tampil setelah disetujui admin.');
     }
 }

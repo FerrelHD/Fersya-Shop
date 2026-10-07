@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Coupon;
 use App\Models\Product;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -14,14 +16,16 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
-        User::firstOrCreate(
-            ['email' => 'admin@fersya.test'],
-            [
-                'name' => 'Admin Fersya',
-                'password' => bcrypt('fersya2025'),
-                'role' => 'admin',
-            ]
-        );
+        if (app()->environment('local', 'testing')) {
+            User::firstOrCreate(
+                ['email' => env('ADMIN_EMAIL', 'admin@fersya.test')],
+                [
+                    'name' => 'Admin Fersya',
+                    'password' => bcrypt(env('ADMIN_PASSWORD', 'fersya2025')),
+                    'role' => 'admin',
+                ]
+            );
+        }
 
         $bread = Category::firstOrCreate(['slug' => 'roti-gandum'], ['name' => 'Roti Gandum']);
         $coffee = Category::firstOrCreate(['slug' => 'kopi'], ['name' => 'Kopi']);
@@ -76,7 +80,7 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        \App\Models\Coupon::firstOrCreate(
+        Coupon::firstOrCreate(
             ['code' => 'FERSYA10'],
             [
                 'type' => 'percent',
@@ -86,7 +90,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        \App\Models\Coupon::firstOrCreate(
+        Coupon::firstOrCreate(
             ['code' => 'HEBAT15K'],
             [
                 'type' => 'fixed',
@@ -96,7 +100,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        \App\Models\Setting::set('announcement_active', '1');
-        \App\Models\Setting::set('announcement_text', '🍞 Freshly Baked Everyday · 🚚 Gratis Ongkos Kirim · Gunakan Kupon FERSYA10 untuk Diskon 10%');
+        Setting::set('announcement_active', '1');
+        Setting::set('announcement_text', '🍞 Freshly Baked Everyday · 🚚 Gratis Ongkos Kirim · Gunakan Kupon FERSYA10 untuk Diskon 10%');
     }
 }

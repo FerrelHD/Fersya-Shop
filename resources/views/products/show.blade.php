@@ -5,26 +5,24 @@
 >
 @push('head')
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org/",
-  "@type": "Product",
-  "name": "{{ $product->name }}",
-  "description": "{{ $product->description }}",
-  "image": "{{ asset($product->primaryImage()?->image_path ?? 'images/bread.png') }}",
-  "offers": {
-    "@type": "Offer",
-    "priceCurrency": "IDR",
-    "price": "{{ $product->base_price }}",
-    "availability": "{{ $product->variants->sum('stock') > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' }}"
-  }
-  @if($product->reviews->count() > 0)
-  ,"aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "{{ round($product->reviews->avg('rating'), 1) }}",
-    "reviewCount": "{{ $product->reviews->count() }}"
-  }
-  @endif
-}
+{!! json_encode(array_filter([
+  '@context' => 'https://schema.org/',
+  '@type' => 'Product',
+  'name' => $product->name,
+  'description' => $product->description,
+  'image' => asset($product->primaryImage()?->image_path ?? 'images/bread.png'),
+  'offers' => [
+    '@type' => 'Offer',
+    'priceCurrency' => 'IDR',
+    'price' => (string) $product->base_price,
+    'availability' => $product->variants->sum('stock') > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+  ],
+  'aggregateRating' => $product->reviews->count() > 0 ? [
+    '@type' => 'AggregateRating',
+    'ratingValue' => (string) round($product->reviews->avg('rating'), 1),
+    'reviewCount' => (string) $product->reviews->count(),
+  ] : null,
+]), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
 </script>
 @endpush
 <section class="px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto py-16">

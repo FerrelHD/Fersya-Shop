@@ -31,6 +31,7 @@ class OrderController extends Controller
             if ($exactOrder) {
                 // Beri akses session agar bisa lihat detail
                 session()->push('accessible_orders', $exactOrder->order_number);
+
                 return redirect()->route('orders.show', $exactOrder);
             }
 
@@ -41,11 +42,6 @@ class OrderController extends Controller
                     ->with(['items.variant.product'])
                     ->latest()
                     ->get();
-
-                // Beri akses session untuk semua pesanan yang ditemukan via nomor HP
-                foreach ($orders as $found) {
-                    session()->push('accessible_orders', $found->order_number);
-                }
             }
         }
 

@@ -36,22 +36,22 @@ class StatsOverviewWidget extends BaseWidget
             ->count();
 
         return [
-            Stat::make('💰 Pendapatan Hari Ini', 'Rp ' . number_format($todayRevenue, 0, ',', '.'))
-                ->description('Bulan ini: Rp ' . number_format($monthRevenue, 0, ',', '.'))
+            Stat::make('💰 Pendapatan Hari Ini', 'Rp '.number_format($todayRevenue, 0, ',', '.'))
+                ->description('Bulan ini: Rp '.number_format($monthRevenue, 0, ',', '.'))
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
                 ->color('success'),
 
-            Stat::make('🚚 Siap Kirim', $readyToShip . ' pesanan')
-                ->description($pendingPayment . ' menunggu pembayaran')
+            Stat::make('🚚 Siap Kirim', $readyToShip.' pesanan')
+                ->description($pendingPayment.' menunggu pembayaran')
                 ->descriptionIcon('heroicon-m-clock')
                 ->color($readyToShip > 0 ? 'warning' : 'gray'),
 
-            Stat::make('⭐ Ulasan Baru', $pendingReviews . ' menunggu')
+            Stat::make('⭐ Ulasan Baru', $pendingReviews.' menunggu')
                 ->description('Perlu disetujui sebelum tampil')
                 ->descriptionIcon('heroicon-m-star')
                 ->color($pendingReviews > 0 ? 'info' : 'gray'),
 
-            Stat::make('📦 Stok Hampir Habis', $lowStock . ' varian')
+            Stat::make('📦 Stok Hampir Habis', $lowStock.' varian')
                 ->description('Sisa ≤ 5 pcs — segera restock')
                 ->descriptionIcon('heroicon-m-exclamation-triangle')
                 ->color($lowStock > 0 ? 'danger' : 'success'),

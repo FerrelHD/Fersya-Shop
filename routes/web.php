@@ -20,9 +20,9 @@ Route::get('/produk/{product}', [ProductController::class, 'show'])->name('produ
 Route::post('/produk/{product}/ulasan', [ReviewController::class, 'store'])->middleware('throttle:5,1')->name('reviews.store');
 
 Route::get('/keranjang', [CartController::class, 'index'])->name('cart.index');
-Route::post('/keranjang', [CartController::class, 'store'])->name('cart.store');
-Route::patch('/keranjang/{variant}', [CartController::class, 'update'])->name('cart.update');
-Route::delete('/keranjang/{variant}', [CartController::class, 'destroy'])->name('cart.destroy');
+Route::post('/keranjang', [CartController::class, 'store'])->middleware('throttle:60,1')->name('cart.store');
+Route::patch('/keranjang/{variant}', [CartController::class, 'update'])->middleware('throttle:60,1')->name('cart.update');
+Route::delete('/keranjang/{variant}', [CartController::class, 'destroy'])->middleware('throttle:60,1')->name('cart.destroy');
 Route::post('/kupon', [CartController::class, 'applyCoupon'])->middleware('throttle:15,1')->name('coupon.apply');
 Route::delete('/kupon', [CartController::class, 'removeCoupon'])->name('coupon.remove');
 

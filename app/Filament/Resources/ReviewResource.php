@@ -15,9 +15,13 @@ class ReviewResource extends Resource
     protected static ?string $model = Review::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-star';
+
     protected static ?string $navigationLabel = 'Ulasan';
+
     protected static ?string $modelLabel = 'Ulasan';
+
     protected static ?string $pluralModelLabel = 'Ulasan';
+
     protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
@@ -110,4 +114,3 @@ class ReviewResource extends Resource
         return false;
     }
 }
-

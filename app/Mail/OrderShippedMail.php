@@ -21,7 +21,7 @@ class OrderShippedMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Paket Dikirim! Pesanan ' . $this->order->order_number . ' - Fersya Shop',
+            subject: 'Paket Dikirim! Pesanan '.$this->order->order_number.' - Fersya Shop',
         );
     }
 

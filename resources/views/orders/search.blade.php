@@ -50,7 +50,7 @@
 <p class="text-on-surface-variant text-sm">Pembeli: <strong>{{ $order->guest_name }}</strong> ({{ substr($order->guest_phone, 0, 4) . '****' . substr($order->guest_phone, -3) }}) · Tanggal: {{ $order->created_at->format('d M Y, H:i') }}</p>
 <p class="text-primary font-bold text-base">Total: Rp {{ number_format($order->total_amount, 0, ',', '.') }}</p>
 </div>
-<a href="{{ route('orders.show', $order) }}" class="w-full sm:w-auto text-center border border-primary text-primary px-6 py-3 rounded-xl font-bold hover:bg-primary hover:text-on-primary transition-all">Lihat Detail & QRIS</a>
+<a href="{{ route('orders.search', ['q' => $order->order_number]) }}" class="w-full sm:w-auto text-center border border-primary text-primary px-6 py-3 rounded-xl font-bold hover:bg-primary hover:text-on-primary transition-all">Lihat Detail & QRIS</a>
 </div>
 @endforeach
 </div>

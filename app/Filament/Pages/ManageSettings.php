@@ -13,8 +13,11 @@ class ManageSettings extends Page implements Forms\Contracts\HasForms
     use Forms\Concerns\InteractsWithForms;
 
     protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
+
     protected static ?string $navigationLabel = 'Pengaturan Toko';
+
     protected static ?string $title = 'Pengaturan Toko & Announcement';
+
     protected static ?int $navigationSort = 10;
 
     protected static string $view = 'filament.pages.manage-settings';

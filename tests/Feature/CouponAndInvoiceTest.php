@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Category;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\Product;
@@ -23,7 +24,7 @@ class CouponAndInvoiceTest extends TestCase
             'is_active' => true,
         ]);
 
-        $category = \App\Models\Category::create(['name' => 'Roti', 'slug' => 'roti']);
+        $category = Category::create(['name' => 'Roti', 'slug' => 'roti']);
         $product = Product::create([
             'category_id' => $category->id,
             'name' => 'Roti Test',

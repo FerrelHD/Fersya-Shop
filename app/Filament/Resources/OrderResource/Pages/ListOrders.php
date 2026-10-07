@@ -22,12 +22,12 @@ class ListOrders extends ListRecords
                 ->action(function (): StreamedResponse {
                     return response()->streamDownload(function () {
                         $handle = fopen('php://output', 'w');
-                        fputs($handle, "\xEF\xBB\xBF");
+                        fwrite($handle, "\xEF\xBB\xBF");
 
                         fputcsv($handle, [
                             'No. Pesanan', 'Nama Pembeli', 'No. WhatsApp', 'Email',
                             'Total Bayar (Rp)', 'Diskon (Rp)', 'Kupon',
-                            'Status Pembayaran', 'Status Pengiriman', 'No. Resi', 'Tanggal'
+                            'Status Pembayaran', 'Status Pengiriman', 'No. Resi', 'Tanggal',
                         ]);
 
                         Order::latest()->chunk(100, function ($orders) use ($handle) {
@@ -49,7 +49,7 @@ class ListOrders extends ListRecords
                         });
 
                         fclose($handle);
-                    }, 'laporan-penjualan-fersya-' . date('Y-m-d') . '.csv', [
+                    }, 'laporan-penjualan-fersya-'.date('Y-m-d').'.csv', [
                         'Content-Type' => 'text/csv; charset=UTF-8',
                     ]);
                 }),

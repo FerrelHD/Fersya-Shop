@@ -21,7 +21,7 @@ class OrderCreatedMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Konfirmasi Pesanan ' . $this->order->order_number . ' - Fersya Shop',
+            subject: 'Konfirmasi Pesanan '.$this->order->order_number.' - Fersya Shop',
         );
     }
 

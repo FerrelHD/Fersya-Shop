@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Models\Coupon;
 use App\Models\ProductVariant;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Session;
@@ -42,7 +43,7 @@ class Cart
     public static function applyCoupon(string $code): array
     {
         $code = strtoupper(trim($code));
-        $coupon = \App\Models\Coupon::where('code', $code)->where('is_active', true)->first();
+        $coupon = Coupon::where('code', $code)->where('is_active', true)->first();
 
         if (! $coupon) {
             return ['success' => false, 'message' => 'Kode kupon tidak ditemukan atau sudah tidak aktif.'];
@@ -52,11 +53,12 @@ class Cart
         if ($subtotal < $coupon->min_spend) {
             return [
                 'success' => false,
-                'message' => 'Minimal belanja untuk kupon ini adalah Rp ' . number_format($coupon->min_spend, 0, ',', '.'),
+                'message' => 'Minimal belanja untuk kupon ini adalah Rp '.number_format($coupon->min_spend, 0, ',', '.'),
             ];
         }
 
         Session::put('applied_coupon', $coupon->code);
+
         return ['success' => true, 'message' => 'Kupon berhasil dipasang!'];
     }
 
@@ -65,14 +67,17 @@ class Cart
         Session::forget('applied_coupon');
     }
 
-    public static function coupon(): ?\App\Models\Coupon
+    public static function coupon(): ?Coupon
     {
         $code = Session::get('applied_coupon');
-        if (! $code) return null;
+        if (! $code) {
+            return null;
+        }
 
-        $coupon = \App\Models\Coupon::where('code', $code)->where('is_active', true)->first();
+        $coupon = Coupon::where('code', $code)->where('is_active', true)->first();
         if ($coupon && self::total() < $coupon->min_spend) {
             self::removeCoupon();
+
             return null;
         }
 
@@ -82,6 +87,7 @@ class Cart
     public static function discount(): int
     {
         $coupon = self::coupon();
+
         return $coupon ? $coupon->calculateDiscount(self::total()) : 0;
     }
 

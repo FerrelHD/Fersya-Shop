@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProductVariant;
 use App\Support\Cart;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -24,10 +25,10 @@ class CartController extends Controller
     {
         $data = $request->validate([
             'variant_id' => ['required', 'integer', 'exists:product_variants,id'],
-            'quantity' => ['required', 'integer', 'min:1'],
+            'quantity' => ['required', 'integer', 'min:1', 'max:99'],
         ]);
 
-        $variant = \App\Models\ProductVariant::findOrFail($data['variant_id']);
+        $variant = ProductVariant::findOrFail($data['variant_id']);
         $existingQty = session('cart.'.$variant->id, 0);
         $newTotalQty = $existingQty + $data['quantity'];
 
@@ -42,10 +43,10 @@ class CartController extends Controller
 
     public function update(Request $request, int $variantId): RedirectResponse
     {
-        $data = $request->validate(['quantity' => ['required', 'integer', 'min:0']]);
+        $data = $request->validate(['quantity' => ['required', 'integer', 'min:0', 'max:99']]);
 
         if ($data['quantity'] > 0) {
-            $variant = \App\Models\ProductVariant::findOrFail($variantId);
+            $variant = ProductVariant::findOrFail($variantId);
             if ($variant->stock < $data['quantity']) {
                 return back()->withErrors(['quantity' => "Stok produk tidak mencukupi (Tersisa {$variant->stock} pcs)."]);
             }
