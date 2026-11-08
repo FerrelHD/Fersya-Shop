@@ -45,7 +45,14 @@
 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-surface p-5 sm:p-6 rounded-2xl ambient-shadow">
 <div>
 <h4 class="font-headline-md text-base text-primary font-bold">{{ $item->variant->product->name }}</h4>
+<div class="flex items-center gap-2 mt-0.5">
 <p class="text-xs text-on-surface-variant">Varian: {{ $item->variant->name }} (x{{ $item->quantity }})</p>
+@if ($item->variant->product?->is_preorder)
+<span class="inline-flex items-center text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200">PO H-1</span>
+@else
+<span class="inline-flex items-center text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">Ready</span>
+@endif
+</div>
 @if ($order->payment_status === 'paid')
 <a href="{{ route('products.show', ['product' => $item->variant->product, 'order' => $order->order_number]) }}#review-section" class="inline-block text-xs text-primary font-bold hover:underline mt-2">
 ⭐ Beri Ulasan Produk Ini
@@ -98,8 +105,25 @@
 
 @if ($order->payment_status === 'pending')
 @php
-$waText = rawurlencode("Halo Admin Fersya Shop, saya ingin konfirmasi pembayaran untuk pesanan:\n\n*Nomor Pesanan:* {$order->order_number}\n*Nama:* {$order->guest_name}\n*Total:* Rp " . number_format($order->total_amount, 0, ',', '.') . "\n\nBerikut saya sertakan bukti transfer / scan QRIS.");
-$waUrl = "https://wa.me/6281321686115?text={$waText}";
+$waLines = [];
+$waLines[] = "Halo Admin Fersya Shop, saya ingin konfirmasi pesanan:";
+$waLines[] = "";
+$waLines[] = "📋 *Nomor Pesanan:* {$order->order_number}";
+$waLines[] = "👤 *Nama:* {$order->guest_name} ({$order->guest_phone})";
+if ($order->shippingAddress) {
+    $waLines[] = "📍 *Alamat:* {$order->shippingAddress->address}, {$order->shippingAddress->city}, {$order->shippingAddress->province} {$order->shippingAddress->postal_code}";
+}
+$waLines[] = "";
+$waLines[] = "🛒 *ITEM PESANAN:*";
+foreach ($order->items as $idx => $oi) {
+    $poLabel = $oi->variant?->product?->is_preorder ? '[⏳ PO H-1]' : '[⚡ READY]';
+    $waLines[] = ($idx + 1) . ". {$oi->variant?->product?->name} ({$oi->variant?->name}) x{$oi->quantity} {$poLabel} - Rp " . number_format($oi->price * $oi->quantity, 0, ',', '.');
+}
+$waLines[] = "";
+$waLines[] = "💰 *Total Pembayaran:* Rp " . number_format($order->total_amount, 0, ',', '.');
+$waLines[] = "";
+$waLines[] = "Mohon info nomor rekening / barcode QRIS dan konfirmasi jadwal pengirimannya ya Bu. Terima kasih! 🙏";
+$waUrl = "https://wa.me/6281321686115?text=" . rawurlencode(implode("\n", $waLines));
 @endphp
 
 <!-- Pembayaran QRIS Card -->
@@ -112,7 +136,7 @@ $waUrl = "https://wa.me/6281321686115?text={$waText}";
 
 <a href="{{ $waUrl }}" target="_blank" rel="noopener noreferrer" class="w-full bg-[#25D366] text-white py-4 px-6 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-opacity-90 transition-all shadow-md">
 <span class="material-symbols-outlined">chat</span>
-<span>Konfirmasi Pembayaran via WA</span>
+<span>Konfirmasi Pesanan ke WhatsApp</span>
 </a>
 </div>
 @elseif ($order->payment_status === 'paid')

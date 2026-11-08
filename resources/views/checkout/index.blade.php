@@ -27,15 +27,25 @@
 </div>
 @endif
 
-<button type="submit" class="bg-primary text-on-primary px-10 py-5 rounded-lg w-full">Buat Pesanan</button>
+<button type="submit" class="bg-primary text-on-primary px-10 py-5 rounded-xl w-full font-bold shadow-md hover:bg-opacity-90 transition-all flex items-center justify-center gap-2">
+<span>Buat Pesanan & Lanjut ke WhatsApp</span>
+<span class="material-symbols-outlined text-xl">arrow_forward</span>
+</button>
 </form>
 
 <div class="w-full md:w-1/3 bg-surface-container-low p-6 md:p-8 rounded-2xl h-fit md:sticky md:top-8">
 <h2 class="font-headline-md text-body-lg text-primary mb-6">Ringkasan Pesanan</h2>
 @foreach ($items as $item)
-<div class="flex justify-between font-body-md mb-3 gap-2">
-<span class="text-sm min-w-0 truncate">{{ $item['variant']->product->name }} ({{ $item['variant']->name }}) x{{ $item['quantity'] }}</span>
-<span class="text-sm shrink-0">Rp {{ number_format($item['subtotal'], 0, ',', '.') }}</span>
+<div class="flex justify-between font-body-md mb-3 gap-2 items-start">
+<div class="min-w-0">
+<span class="text-sm block truncate font-medium">{{ $item['variant']->product->name }} ({{ $item['variant']->name }}) x{{ $item['quantity'] }}</span>
+@if ($item['variant']->product->is_preorder)
+<span class="inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 mt-1">PO H-1</span>
+@else
+<span class="inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 mt-1">Ready</span>
+@endif
+</div>
+<span class="text-sm shrink-0 font-semibold text-primary">Rp {{ number_format($item['subtotal'], 0, ',', '.') }}</span>
 </div>
 @endforeach
 <div class="border-t border-outline-variant mt-4 pt-4 flex justify-between text-sm text-on-surface-variant">
