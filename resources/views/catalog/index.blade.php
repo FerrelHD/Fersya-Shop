@@ -2,19 +2,19 @@
 <section class="pt-16 pb-12 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto text-center">
 <span class="font-label-sm text-label-sm text-primary tracking-widest uppercase mb-4 block">Semua Produk</span>
 <h1 class="font-headline-lg text-headline-lg text-primary mb-6">Katalog Produk</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto">Pilihan roti gandum alami, aneka frozen food higienis, dan minuman segar untuk keluarga Anda.</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto">Pilihan aneka roti & kue lezat, frozen food higienis keluarga, dan minuman segar siap nikmati.</p>
 </section>
 <section class="px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto mb-16">
-<form method="GET" class="flex flex-col md:flex-row items-center justify-between gap-6 border-b border-outline-variant pb-8">
-<div class="flex flex-wrap gap-3">
-<button type="submit" name="kategori" value="" class="font-label-sm text-label-sm uppercase px-6 py-3 rounded-full transition-all {{ $activeCategory === '' ? 'bg-primary text-on-primary' : 'bg-secondary-container text-primary' }}">Semua</button>
+<form method="GET" class="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 border-b border-outline-variant/60 pb-3">
+<div class="flex items-center gap-6 sm:gap-8 overflow-x-auto w-full md:w-auto -mb-[13px] scrollbar-none">
+<button type="submit" name="kategori" value="" class="text-sm font-medium pb-3 border-b-2 whitespace-nowrap transition-colors {{ $activeCategory === '' ? 'border-primary text-primary font-semibold' : 'border-transparent text-stone-500 hover:text-stone-900' }}">Semua</button>
 @foreach ($categories as $category)
-<button type="submit" name="kategori" value="{{ $category->slug }}" class="font-label-sm text-label-sm uppercase px-6 py-3 rounded-full transition-all {{ $activeCategory === $category->slug ? 'bg-primary text-on-primary' : 'bg-secondary-container text-primary' }}">{{ $category->name }}</button>
+<button type="submit" name="kategori" value="{{ $category->slug }}" class="text-sm font-medium pb-3 border-b-2 whitespace-nowrap transition-colors {{ $activeCategory === $category->slug ? 'border-primary text-primary font-semibold' : 'border-transparent text-stone-500 hover:text-stone-900' }}">{{ $category->name }}</button>
 @endforeach
 </div>
-<div class="relative w-full md:w-72">
-<input type="text" name="cari" value="{{ $search }}" placeholder="Cari produk..." class="w-full bg-transparent border border-outline rounded-lg py-3 pl-12 pr-4 font-body-md text-body-md focus:border-primary focus:ring-0 transition-all"/>
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-secondary">search</span>
+<div class="relative w-full md:w-64 mb-1">
+<input type="text" name="cari" value="{{ $search }}" placeholder="Cari produk..." class="w-full bg-transparent border border-outline-variant/80 rounded-xl py-2 pl-10 pr-4 text-xs font-body-md text-primary placeholder:text-stone-400 focus:border-primary focus:ring-0 transition-all"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-lg">search</span>
 </div>
 </form>
 </section>
