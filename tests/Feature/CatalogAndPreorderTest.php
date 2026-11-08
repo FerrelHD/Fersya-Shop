@@ -12,10 +12,21 @@ class CatalogAndPreorderTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_catalog_can_filter_by_frozen_food_and_minuman(): void
+    public function test_catalog_can_filter_by_roti_kue_frozen_food_and_minuman(): void
     {
+        $breadCat = Category::create(['name' => 'Roti & Kue', 'slug' => 'roti-kue']);
         $frozenCat = Category::create(['name' => 'Frozen Food', 'slug' => 'frozen-food']);
         $drinksCat = Category::create(['name' => 'Minuman', 'slug' => 'minuman']);
+
+        $breadProduct = Product::create([
+            'category_id' => $breadCat->id,
+            'name' => 'Fudgy Brownies Panggang',
+            'slug' => 'fudgy-brownies-panggang',
+            'description' => 'Test Brownies',
+            'base_price' => 55000,
+            'is_preorder' => true,
+            'preorder_info' => 'PO H-1',
+        ]);
 
         $frozenProduct = Product::create([
             'category_id' => $frozenCat->id,
@@ -36,17 +47,26 @@ class CatalogAndPreorderTest extends TestCase
             'is_preorder' => false,
         ]);
 
+        // Filter Roti & Kue
+        $responseBread = $this->get(route('katalog.index', ['kategori' => 'roti-kue']));
+        $responseBread->assertStatus(200);
+        $responseBread->assertSee('Fudgy Brownies Panggang');
+        $responseBread->assertDontSee('Risoles Mayo Ragout');
+        $responseBread->assertDontSee('Kopi Susu Aren');
+
         // Filter Frozen Food
         $responseFrozen = $this->get(route('katalog.index', ['kategori' => 'frozen-food']));
         $responseFrozen->assertStatus(200);
         $responseFrozen->assertSee('Risoles Mayo Ragout');
         $responseFrozen->assertDontSee('Kopi Susu Aren');
+        $responseFrozen->assertDontSee('Fudgy Brownies Panggang');
 
         // Filter Minuman
         $responseDrinks = $this->get(route('katalog.index', ['kategori' => 'minuman']));
         $responseDrinks->assertStatus(200);
         $responseDrinks->assertSee('Kopi Susu Aren');
         $responseDrinks->assertDontSee('Risoles Mayo Ragout');
+        $responseDrinks->assertDontSee('Fudgy Brownies Panggang');
     }
 
     public function test_product_detail_displays_preorder_badge_and_lead_time_info(): void
@@ -80,7 +100,7 @@ class CatalogAndPreorderTest extends TestCase
 
     public function test_cart_displays_preorder_badge_and_whatsapp_button(): void
     {
-        $category = Category::create(['name' => 'Roti Gandum', 'slug' => 'roti-gandum']);
+        $category = Category::create(['name' => 'Roti & Kue', 'slug' => 'roti-kue']);
         $product = Product::create([
             'category_id' => $category->id,
             'name' => 'Roti Gandum Utuh',

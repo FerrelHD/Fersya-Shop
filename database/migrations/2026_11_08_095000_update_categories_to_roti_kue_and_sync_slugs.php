@@ -36,25 +36,6 @@ return new class extends Migration
                 'slug' => 'frozen-food',
                 'updated_at' => now(),
             ]);
-
-        // Ensure the 3 core categories exist if starting fresh
-        $categories = [
-            ['name' => 'Roti & Kue', 'slug' => 'roti-kue'],
-            ['name' => 'Frozen Food', 'slug' => 'frozen-food'],
-            ['name' => 'Minuman', 'slug' => 'minuman'],
-        ];
-
-        foreach ($categories as $cat) {
-            $exists = DB::table('categories')->where('slug', $cat['slug'])->exists();
-            if (! $exists) {
-                DB::table('categories')->insert([
-                    'name' => $cat['name'],
-                    'slug' => $cat['slug'],
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-            }
-        }
     }
 
     /**
