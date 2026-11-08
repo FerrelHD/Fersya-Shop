@@ -7,9 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['category_id', 'name', 'slug', 'description', 'base_price', 'shelf_life_info'])]
+#[Fillable(['category_id', 'name', 'slug', 'description', 'base_price', 'shelf_life_info', 'is_preorder', 'preorder_info'])]
 class Product extends Model
 {
+    protected function casts(): array
+    {
+        return [
+            'is_preorder' => 'boolean',
+        ];
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
