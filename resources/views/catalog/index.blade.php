@@ -25,21 +25,16 @@
 <div>
 <div class="relative aspect-[4/3] mb-4 overflow-hidden rounded-xl bg-surface-container">
 <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ asset($product->primaryImage()?->image_path ?? 'images/bread.png') }}')"></div>
-<div class="absolute top-2.5 left-2.5">
-@if ($product->is_preorder)
-<span class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-50/95 text-amber-800 border border-amber-200 shadow-xs backdrop-blur-xs">
-<span class="material-symbols-outlined text-[12px]">schedule</span> PO
-</span>
-@else
-<span class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-50/95 text-emerald-800 border border-emerald-200 shadow-xs backdrop-blur-xs">
-<span class="material-symbols-outlined text-[12px]">bolt</span> Ready
-</span>
-@endif
-</div>
 </div>
 <div class="text-center">
 <h4 class="font-headline-md text-base text-primary mb-1 line-clamp-1">{{ $product->name }}</h4>
-<p class="text-primary font-bold text-sm mb-4">Rp {{ number_format($product->base_price, 0, ',', '.') }}</p>
+<div class="flex items-center justify-center gap-1.5 text-sm mb-4">
+<span class="text-primary font-bold">Rp {{ number_format($product->base_price, 0, ',', '.') }}</span>
+@if ($product->is_preorder)
+<span class="text-stone-300">·</span>
+<span class="text-xs text-stone-500 font-normal">Pre-order</span>
+@endif
+</div>
 </div>
 </div>
 <span class="block w-full border border-primary text-primary py-2.5 rounded-lg text-sm text-center font-semibold hover:bg-primary hover:text-on-primary transition-all">Lihat Produk</span>

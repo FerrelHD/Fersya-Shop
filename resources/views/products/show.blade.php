@@ -38,27 +38,22 @@
 </div>
 </div>
 <div class="w-full md:w-1/2">
-<div class="flex items-center gap-3 mb-4">
+<div class="flex items-center gap-2 mb-4">
 <span class="font-label-sm text-label-sm text-primary uppercase tracking-widest block">{{ $product->category->name }}</span>
 @if ($product->is_preorder)
-<span class="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
-<span class="material-symbols-outlined text-[13px]">schedule</span> Pre-Order
-</span>
-@else
-<span class="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
-<span class="material-symbols-outlined text-[13px]">bolt</span> Ready Stock
-</span>
+<span class="text-stone-300">·</span>
+<span class="text-xs uppercase tracking-wider text-stone-500 font-medium">Pre-Order</span>
 @endif
 </div>
 <h1 class="font-headline-lg text-headline-lg text-primary mb-4">{{ $product->name }}</h1>
 <p class="font-body-lg text-body-lg text-on-surface-variant mb-6">{{ $product->description }}</p>
 
 @if ($product->is_preorder)
-<div class="mb-6 p-4 rounded-xl bg-amber-50/90 border border-amber-200/80 flex items-start gap-3">
-<span class="material-symbols-outlined text-amber-700 mt-0.5 text-xl">info</span>
+<div class="mb-6 p-4 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary mt-0.5 text-xl">schedule</span>
 <div>
-<h4 class="font-bold text-amber-900 text-sm">Informasi Pre-Order (PO)</h4>
-<p class="text-xs text-amber-800 leading-relaxed mt-0.5">
+<h4 class="font-semibold text-primary text-sm">Informasi Pre-Order</h4>
+<p class="text-xs text-secondary leading-relaxed mt-0.5">
 {{ $product->preorder_info ?? 'Produk ini dibuat fresh berdasarkan pesanan. Estimasi pengiriman H+1 setelah pesanan masuk.' }}
 </p>
 </div>
