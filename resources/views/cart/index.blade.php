@@ -16,13 +16,7 @@
 <div class="flex items-center gap-2 mb-1 flex-wrap">
 <h3 class="font-headline-md text-body-lg text-primary truncate">{{ $item['variant']->product->name }}</h3>
 @if ($item['variant']->product->is_preorder)
-<span class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
-PO H-1
-</span>
-@else
-<span class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
-Ready
-</span>
+<span class="text-xs text-stone-500 font-normal">· Pre-order</span>
 @endif
 </div>
 <p class="text-on-surface-variant font-body-md text-sm">{{ $item['variant']->name }}</p>
@@ -102,8 +96,8 @@ $cartWaLines[] = "";
 $cartWaLines[] = "🛒 DAFTAR ITEM:";
 $itemIndex = 1;
 foreach ($items as $cartItem) {
-    $poTag = $cartItem['variant']->product->is_preorder ? '[⏳ PO H-1]' : '[⚡ READY]';
-    $cartWaLines[] = "{$itemIndex}. {$cartItem['variant']->product->name} ({$cartItem['variant']->name}) x{$cartItem['quantity']} {$poTag} - Rp " . number_format($cartItem['subtotal'], 0, ',', '.');
+    $poTag = $cartItem['variant']->product->is_preorder ? ' (Pre-order)' : '';
+    $cartWaLines[] = "{$itemIndex}. {$cartItem['variant']->product->name} ({$cartItem['variant']->name}) x{$cartItem['quantity']}{$poTag} - Rp " . number_format($cartItem['subtotal'], 0, ',', '.');
     $itemIndex++;
 }
 $cartWaLines[] = "";

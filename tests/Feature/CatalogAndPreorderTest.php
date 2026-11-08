@@ -104,7 +104,7 @@ class CatalogAndPreorderTest extends TestCase
 
         $response = $this->get(route('cart.index'));
         $response->assertStatus(200);
-        $response->assertSee('PO H-1');
+        $response->assertSee('Pre-order');
         $response->assertSee('Pesan Cepat via WhatsApp');
         $response->assertSee('https://wa.me/6281321686115', false);
     }

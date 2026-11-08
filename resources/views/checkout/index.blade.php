@@ -40,9 +40,7 @@
 <div class="min-w-0">
 <span class="text-sm block truncate font-medium">{{ $item['variant']->product->name }} ({{ $item['variant']->name }}) x{{ $item['quantity'] }}</span>
 @if ($item['variant']->product->is_preorder)
-<span class="inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 mt-1">PO H-1</span>
-@else
-<span class="inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 mt-1">Ready</span>
+<span class="text-[11px] text-stone-500 font-normal">Pre-order</span>
 @endif
 </div>
 <span class="text-sm shrink-0 font-semibold text-primary">Rp {{ number_format($item['subtotal'], 0, ',', '.') }}</span>

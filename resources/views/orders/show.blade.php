@@ -48,9 +48,7 @@
 <div class="flex items-center gap-2 mt-0.5">
 <p class="text-xs text-on-surface-variant">Varian: {{ $item->variant->name }} (x{{ $item->quantity }})</p>
 @if ($item->variant->product?->is_preorder)
-<span class="inline-flex items-center text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200">PO H-1</span>
-@else
-<span class="inline-flex items-center text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">Ready</span>
+<span class="text-xs text-stone-500 font-normal">· Pre-order</span>
 @endif
 </div>
 @if ($order->payment_status === 'paid')
@@ -116,8 +114,8 @@ if ($order->shippingAddress) {
 $waLines[] = "";
 $waLines[] = "🛒 *ITEM PESANAN:*";
 foreach ($order->items as $idx => $oi) {
-    $poLabel = $oi->variant?->product?->is_preorder ? '[⏳ PO H-1]' : '[⚡ READY]';
-    $waLines[] = ($idx + 1) . ". {$oi->variant?->product?->name} ({$oi->variant?->name}) x{$oi->quantity} {$poLabel} - Rp " . number_format($oi->price * $oi->quantity, 0, ',', '.');
+    $poLabel = $oi->variant?->product?->is_preorder ? ' (Pre-order)' : '';
+    $waLines[] = ($idx + 1) . ". {$oi->variant?->product?->name} ({$oi->variant?->name}) x{$oi->quantity}{$poLabel} - Rp " . number_format($oi->price * $oi->quantity, 0, ',', '.');
 }
 $waLines[] = "";
 $waLines[] = "💰 *Total Pembayaran:* Rp " . number_format($order->total_amount, 0, ',', '.');
