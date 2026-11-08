@@ -38,9 +38,32 @@
 </div>
 </div>
 <div class="w-full md:w-1/2">
-<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-4 block">{{ $product->category->name }}</span>
+<div class="flex items-center gap-3 mb-4">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest block">{{ $product->category->name }}</span>
+@if ($product->is_preorder)
+<span class="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
+<span class="material-symbols-outlined text-[13px]">schedule</span> Pre-Order
+</span>
+@else
+<span class="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+<span class="material-symbols-outlined text-[13px]">bolt</span> Ready Stock
+</span>
+@endif
+</div>
 <h1 class="font-headline-lg text-headline-lg text-primary mb-4">{{ $product->name }}</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant mb-8">{{ $product->description }}</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-6">{{ $product->description }}</p>
+
+@if ($product->is_preorder)
+<div class="mb-6 p-4 rounded-xl bg-amber-50/90 border border-amber-200/80 flex items-start gap-3">
+<span class="material-symbols-outlined text-amber-700 mt-0.5 text-xl">info</span>
+<div>
+<h4 class="font-bold text-amber-900 text-sm">Informasi Pre-Order (PO)</h4>
+<p class="text-xs text-amber-800 leading-relaxed mt-0.5">
+{{ $product->preorder_info ?? 'Produk ini dibuat fresh berdasarkan pesanan. Estimasi pengiriman H+1 setelah pesanan masuk.' }}
+</p>
+</div>
+</div>
+@endif
 
 @if (session('status'))
 <div class="mb-6 p-4 rounded-lg bg-primary-fixed text-on-primary-fixed font-body-md">
@@ -113,10 +136,12 @@
 </div>
 @endif
 
-@if ($product->category->slug === 'teh-herbal')
-<div class="bg-secondary-container rounded-lg p-6">
-<h3 class="font-headline-md text-body-lg text-primary mb-2">Disclaimer</h3>
-<p class="text-on-secondary-container font-body-md">Aman diminum saat hari pertama haid. Tidak dianjurkan untuk ibu hamil. Konsultasikan dengan dokter bila ragu.</p>
+@if ($product->category->slug === 'frozen-food')
+<div class="bg-secondary-container/60 rounded-xl p-5 border border-outline-variant mb-6">
+<h3 class="font-headline-md text-base text-primary font-bold mb-1 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base">ac_unit</span> Saran Penyajian & Penyimpanan
+</h3>
+<p class="text-on-secondary-container text-xs leading-relaxed">Simpan di freezer (-18°C) agar tahan lebih lama. Goreng saat masih setengah beku dengan api sedang sampai renyah dan matang merata.</p>
 </div>
 @endif
 </div>
