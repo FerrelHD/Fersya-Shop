@@ -42,6 +42,14 @@ class ProductResource extends Resource
                     ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('shelf_life_info'),
+                Forms\Components\Toggle::make('is_preorder')
+                    ->label('Sistem Pre-Order (PO)')
+                    ->helperText('Aktifkan jika produk ini disiapkan setelah dipesan.')
+                    ->default(false),
+                Forms\Components\TextInput::make('preorder_info')
+                    ->label('Keterangan Pre-Order')
+                    ->placeholder('Contoh: PO H-1 (Pesan hari ini, dikirim besok)')
+                    ->maxLength(255),
             ]);
     }
 
@@ -59,6 +67,10 @@ class ProductResource extends Resource
                     ->label('Harga Dasar')
                     ->money('IDR')
                     ->sortable(),
+                Tables\Columns\IconColumn::make('is_preorder')
+                    ->label('PO')
+                    ->boolean()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('shelf_life_info')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -71,7 +83,11 @@ class ProductResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\TernaryFilter::make('is_preorder')
+                    ->label('Status Pre-Order')
+                    ->trueLabel('Hanya Pre-Order')
+                    ->falseLabel('Hanya Ready Stock')
+                    ->placeholder('Semua'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
