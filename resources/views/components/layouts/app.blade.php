@@ -4,9 +4,9 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>{{ $title ?? 'Fersya Shop' }}</title>
-<meta name="description" content="{{ $description ?? 'Toko roti gandum artisan, kopi organik pilihan, dan teh herbal premium. Dipilih langsung dari petani lokal Indonesia.' }}">
+<meta name="description" content="{{ $description ?? 'Toko roti gandum artisan, frozen food higienis, dan aneka minuman segar.' }}">
 <meta property="og:title" content="{{ $title ?? 'Fersya Shop' }}">
-<meta property="og:description" content="{{ $description ?? 'Toko roti gandum artisan, kopi organik pilihan, dan teh herbal premium.' }}">
+<meta property="og:description" content="{{ $description ?? 'Toko roti gandum artisan, frozen food higienis, dan aneka minuman segar.' }}">
 <meta property="og:image" content="{{ isset($ogImage) ? $ogImage : asset('images/hero.png') }}">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="id_ID">
@@ -37,10 +37,10 @@
 <div class="flex justify-between items-center w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 h-20">
 <a href="{{ route('home') }}" class="font-headline-md text-headline-md text-primary tracking-tight">Fersya Shop</a>
 <nav class="hidden md:flex items-center space-x-8">
-<a class="{{ request()->routeIs('katalog.index') && !request('kategori') ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-secondary hover:text-primary transition-colors duration-200' }} font-body-md text-body-md" href="{{ route('katalog.index') }}">Shop All</a>
-<a class="{{ request('kategori') === 'roti-gandum' ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-secondary hover:text-primary transition-colors duration-200' }} font-body-md text-body-md" href="{{ route('katalog.index', ['kategori' => 'roti-gandum']) }}">Artisan Bread</a>
-<a class="{{ request('kategori') === 'kopi' ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-secondary hover:text-primary transition-colors duration-200' }} font-body-md text-body-md" href="{{ route('katalog.index', ['kategori' => 'kopi']) }}">Organic Coffee</a>
-<a class="{{ request('kategori') === 'teh-herbal' ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-secondary hover:text-primary transition-colors duration-200' }} font-body-md text-body-md" href="{{ route('katalog.index', ['kategori' => 'teh-herbal']) }}">Herbal Tea</a>
+<a class="{{ request()->routeIs('katalog.index') && !request('kategori') ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-secondary hover:text-primary transition-colors duration-200' }} font-body-md text-body-md" href="{{ route('katalog.index') }}">Semua Produk</a>
+<a class="{{ request('kategori') === 'roti-gandum' ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-secondary hover:text-primary transition-colors duration-200' }} font-body-md text-body-md" href="{{ route('katalog.index', ['kategori' => 'roti-gandum']) }}">Roti Gandum</a>
+<a class="{{ request('kategori') === 'frozen-food' ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-secondary hover:text-primary transition-colors duration-200' }} font-body-md text-body-md" href="{{ route('katalog.index', ['kategori' => 'frozen-food']) }}">Frozen Food</a>
+<a class="{{ request('kategori') === 'minuman' ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-secondary hover:text-primary transition-colors duration-200' }} font-body-md text-body-md" href="{{ route('katalog.index', ['kategori' => 'minuman']) }}">Minuman</a>
 <a class="{{ request()->routeIs('orders.search') ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-secondary hover:text-primary transition-colors duration-200' }} font-body-md text-body-md flex items-center gap-1" href="{{ route('orders.search') }}"><span class="material-symbols-outlined text-lg">search</span> Cek Pesanan</a>
 </nav>
 <div class="flex items-center space-x-6">
@@ -67,10 +67,10 @@
 </button>
 </div>
 <nav class="flex flex-col space-y-6">
-<a class="text-primary font-bold text-lg border-b border-outline-variant pb-2" href="{{ route('katalog.index') }}">Shop All</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors text-lg" href="{{ route('katalog.index', ['kategori' => 'roti-gandum']) }}">Artisan Bread</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors text-lg" href="{{ route('katalog.index', ['kategori' => 'kopi']) }}">Organic Coffee</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors text-lg" href="{{ route('katalog.index', ['kategori' => 'teh-herbal']) }}">Herbal Tea</a>
+<a class="text-primary font-bold text-lg border-b border-outline-variant pb-2" href="{{ route('katalog.index') }}">Semua Produk</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-lg" href="{{ route('katalog.index', ['kategori' => 'roti-gandum']) }}">Roti Gandum</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-lg" href="{{ route('katalog.index', ['kategori' => 'frozen-food']) }}">Frozen Food</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-lg" href="{{ route('katalog.index', ['kategori' => 'minuman']) }}">Minuman</a>
 <a class="text-on-surface-variant hover:text-primary transition-colors text-lg flex items-center gap-2" href="{{ route('orders.search') }}"><span class="material-symbols-outlined text-xl">search</span> Cek Status Pesanan</a>
 </nav>
 </div>
@@ -103,11 +103,11 @@
 <div>
 <h5 class="text-primary font-bold font-body-md mb-6">Explore</h5>
 <ul class="space-y-4">
-<li><a class="text-on-secondary-container hover:text-primary transition-colors font-body-md" href="{{ route('katalog.index') }}">Shop All</a></li>
+<li><a class="text-on-secondary-container hover:text-primary transition-colors font-body-md" href="{{ route('katalog.index') }}">Semua Produk</a></li>
 <li><a class="text-on-secondary-container hover:text-primary transition-colors font-body-md" href="{{ route('orders.search') }}">Cek Status Pesanan</a></li>
-<li><a class="text-on-secondary-container hover:text-primary transition-colors font-body-md" href="{{ route('katalog.index', ['kategori' => 'roti-gandum']) }}">Artisan Bread</a></li>
-<li><a class="text-on-secondary-container hover:text-primary transition-colors font-body-md" href="{{ route('katalog.index', ['kategori' => 'kopi']) }}">Organic Coffee</a></li>
-<li><a class="text-on-secondary-container hover:text-primary transition-colors font-body-md" href="{{ route('katalog.index', ['kategori' => 'teh-herbal']) }}">Herbal Tea</a></li>
+<li><a class="text-on-secondary-container hover:text-primary transition-colors font-body-md" href="{{ route('katalog.index', ['kategori' => 'roti-gandum']) }}">Roti Gandum</a></li>
+<li><a class="text-on-secondary-container hover:text-primary transition-colors font-body-md" href="{{ route('katalog.index', ['kategori' => 'frozen-food']) }}">Frozen Food</a></li>
+<li><a class="text-on-secondary-container hover:text-primary transition-colors font-body-md" href="{{ route('katalog.index', ['kategori' => 'minuman']) }}">Minuman</a></li>
 </ul>
 </div>
 <div>

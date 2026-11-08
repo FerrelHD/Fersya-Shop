@@ -2,7 +2,7 @@
 <section class="pt-16 pb-12 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto text-center">
 <span class="font-label-sm text-label-sm text-primary tracking-widest uppercase mb-4 block">Semua Produk</span>
 <h1 class="font-headline-lg text-headline-lg text-primary mb-6">Katalog Produk</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto">Kurasi roti gandum, kopi, dan teh herbal terbaik kami — dipilih untuk hidup yang lebih sehat.</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto">Pilihan roti gandum alami, aneka frozen food higienis, dan minuman segar untuk keluarga Anda.</p>
 </section>
 <section class="px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto mb-16">
 <form method="GET" class="flex flex-col md:flex-row items-center justify-between gap-6 border-b border-outline-variant pb-8">

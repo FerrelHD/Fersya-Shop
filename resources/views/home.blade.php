@@ -1,6 +1,6 @@
 <x-layouts.app
-    title="Fersya Shop | Hidup Sehat, Disederhanakan"
-    description="Roti gandum artisan, kopi organik pilihan, dan teh herbal premium. Dipilih langsung dari petani lokal Indonesia. Gratis ongkos kirim ke seluruh Indonesia."
+    title="Fersya Shop | Roti Gandum, Frozen Food & Minuman Segar"
+    description="Roti gandum artisan, aneka frozen food higienis, dan minuman segar pilihan. Dibuat fresh tanpa bahan kimia sintetis."
 >
 <!-- Hero Section (Full Background) -->
 <section class="relative min-h-[75vh] lg:min-h-[85vh] flex items-center overflow-hidden bg-surface-container-low">
@@ -16,9 +16,9 @@
 <!-- Hero Content -->
 <div class="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 w-full py-16 lg:py-24">
 <div class="max-w-xl lg:max-w-2xl reveal space-y-6">
-<span class="font-label-sm text-label-sm text-primary tracking-widest uppercase block">Premium Health-Conscious Retail</span>
+<span class="font-label-sm text-label-sm text-primary tracking-widest uppercase block">Artisan Bakery & Frozen Delights</span>
 <h1 class="font-display-lg text-4xl sm:text-5xl lg:text-6xl text-primary font-bold leading-tight">Hidup sehat, disederhanakan</h1>
-<p class="font-body-lg text-lg sm:text-xl text-on-surface-variant leading-relaxed">Bahan jujur untuk hidup yang lebih baik. Kami mengkurasi roti gandum, kopi pilihan, dan ramuan herbal terbaik untuk Anda.</p>
+<p class="font-body-lg text-lg sm:text-xl text-on-surface-variant leading-relaxed">Bahan jujur untuk santapan keluarga Anda. Menyediakan roti gandum alami, aneka frozen food higienis, dan minuman segar siap nikmati.</p>
 <div class="flex flex-col sm:flex-row gap-4 pt-4">
 <a class="bg-primary text-on-primary px-8 py-4 rounded-xl font-body-md text-center hover:bg-opacity-90 transition-all ambient-shadow" href="{{ route('katalog.index') }}">Belanja Sekarang</a>
 <a class="border border-outline text-primary px-8 py-4 rounded-xl font-body-md text-center hover:bg-surface-container transition-all" href="{{ route('katalog.index') }}">Lihat Katalog</a>
@@ -34,33 +34,42 @@
 <div class="aspect-[16/9] sm:aspect-[4/5] bg-surface-container mb-4 sm:mb-8 overflow-hidden rounded-2xl">
 <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('{{ asset('images/bread.png') }}')"></div>
 </div>
-<div class="flex items-center mb-2 sm:mb-4">
+<div class="flex items-center justify-between mb-2 sm:mb-4">
+<div class="flex items-center">
 <span class="material-symbols-outlined text-primary-container mr-3 text-2xl">bakery_dining</span>
 <h3 class="font-headline-md text-headline-md text-primary">Roti Gandum</h3>
+</div>
+<span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">Pre-Order</span>
 </div>
 <p class="text-secondary font-body-md mb-4 sm:mb-6 text-sm sm:text-base">Dibuat dengan ragi alami dan gandum utuh organik tanpa pengawet.</p>
 <span class="text-primary font-semibold flex items-center group-hover:gap-2 transition-all text-sm sm:text-base">Jelajahi <span class="material-symbols-outlined ml-1 text-base sm:text-xl">arrow_forward</span></span>
 </a>
-<a href="{{ route('katalog.index', ['kategori' => 'kopi']) }}" class="group cursor-pointer reveal block" style="transition-delay: 100ms;">
-<div class="aspect-[16/9] sm:aspect-[4/5] bg-surface-container mb-4 sm:mb-8 overflow-hidden rounded-2xl">
-<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('{{ asset('images/coffee.png') }}')"></div>
-</div>
-<div class="flex items-center mb-2 sm:mb-4">
-<span class="material-symbols-outlined text-primary-container mr-3 text-2xl">coffee</span>
-<h3 class="font-headline-md text-headline-md text-primary">Kopi</h3>
-</div>
-<p class="text-secondary font-body-md mb-4 sm:mb-6 text-sm sm:text-base">Biji kopi pilihan dari dataran tinggi Indonesia, disangrai dengan presisi.</p>
-<span class="text-primary font-semibold flex items-center group-hover:gap-2 transition-all text-sm sm:text-base">Jelajahi <span class="material-symbols-outlined ml-1 text-base sm:text-xl">arrow_forward</span></span>
-</a>
-<a href="{{ route('katalog.index', ['kategori' => 'teh-herbal']) }}" class="group cursor-pointer reveal block" style="transition-delay: 200ms;">
+<a href="{{ route('katalog.index', ['kategori' => 'frozen-food']) }}" class="group cursor-pointer reveal block" style="transition-delay: 100ms;">
 <div class="aspect-[16/9] sm:aspect-[4/5] bg-surface-container mb-4 sm:mb-8 overflow-hidden rounded-2xl">
 <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('{{ asset('images/tea.png') }}')"></div>
 </div>
-<div class="flex items-center mb-2 sm:mb-4">
-<span class="material-symbols-outlined text-primary-container mr-3 text-2xl">eco</span>
-<h3 class="font-headline-md text-headline-md text-primary">Teh Herbal</h3>
+<div class="flex items-center justify-between mb-2 sm:mb-4">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-primary-container mr-3 text-2xl">ac_unit</span>
+<h3 class="font-headline-md text-headline-md text-primary">Frozen Food</h3>
 </div>
-<p class="text-secondary font-body-md mb-4 sm:mb-6 text-sm sm:text-base">Ramuan bunga dan herba untuk menenangkan pikiran dan raga.</p>
+<span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">Pre-Order</span>
+</div>
+<p class="text-secondary font-body-md mb-4 sm:mb-6 text-sm sm:text-base">Lauk & camilan beku higienis keluarga, praktis digoreng dan disajikan kapan saja.</p>
+<span class="text-primary font-semibold flex items-center group-hover:gap-2 transition-all text-sm sm:text-base">Jelajahi <span class="material-symbols-outlined ml-1 text-base sm:text-xl">arrow_forward</span></span>
+</a>
+<a href="{{ route('katalog.index', ['kategori' => 'minuman']) }}" class="group cursor-pointer reveal block" style="transition-delay: 200ms;">
+<div class="aspect-[16/9] sm:aspect-[4/5] bg-surface-container mb-4 sm:mb-8 overflow-hidden rounded-2xl">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('{{ asset('images/coffee.png') }}')"></div>
+</div>
+<div class="flex items-center justify-between mb-2 sm:mb-4">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-primary-container mr-3 text-2xl">local_cafe</span>
+<h3 class="font-headline-md text-headline-md text-primary">Minuman</h3>
+</div>
+<span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">Ready Stock</span>
+</div>
+<p class="text-secondary font-body-md mb-4 sm:mb-6 text-sm sm:text-base">Kopi susu pilihan, matcha artisan, dan aneka minuman segar siap minum.</p>
 <span class="text-primary font-semibold flex items-center group-hover:gap-2 transition-all text-sm sm:text-base">Jelajahi <span class="material-symbols-outlined ml-1 text-base sm:text-xl">arrow_forward</span></span>
 </a>
 </div>
@@ -203,11 +212,11 @@ Simpan dalam wadah kedap udara di suhu ruang maksimal 3 hari, atau simpan di dal
 </div>
 <div class="border-b border-surface-variant py-6">
 <button class="flex justify-between items-center w-full text-left group" data-faq-toggle>
-<span class="font-headline-md text-body-lg text-primary group-hover:text-primary-container transition-colors">Apakah produk ini aman untuk ibu hamil?</span>
+<span class="font-headline-md text-body-lg text-primary group-hover:text-primary-container transition-colors">Bagaimana sistem Pre-Order (PO) dan pengirimannya?</span>
 <span class="material-symbols-outlined transform transition-transform duration-300">expand_more</span>
 </button>
 <div class="hidden mt-4 text-on-surface-variant font-body-md">
-Roti dan kopi kami aman dikonsumsi. Untuk varian teh herbal tertentu, kami menyarankan konsultasi dengan dokter terlebih dahulu.
+Untuk menjaga kualitas dan kesegaran, semua makanan (Roti Gandum & Frozen Food) diproduksi H-1 berdasarkan pesanan. Setelah matang/beku sempurna, pesanan akan langsung dikirimkan ke alamat Anda. Minuman tersedia Ready Stock.
 </div>
 </div>
 </div>
