@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             );
         }
 
-        $bread = Category::firstOrCreate(['slug' => 'roti-gandum'], ['name' => 'Roti Gandum']);
+        $bread = Category::firstOrCreate(['slug' => 'roti-kue'], ['name' => 'Roti & Kue']);
         $frozen = Category::firstOrCreate(['slug' => 'frozen-food'], ['name' => 'Frozen Food']);
         $drinks = Category::firstOrCreate(['slug' => 'minuman'], ['name' => 'Minuman']);
 
@@ -39,21 +39,34 @@ class DatabaseSeeder extends Seeder
         $frozenImg = '/images/tea.png';
         $frozenImg2 = '/images/tea.png';
 
+        $legacyMap = [
+            'teh-herbal-pereda-nyeri' => 'Risoles Mayo Ragout',
+            'teh-herbal-pelancar-haid' => 'Cireng Crispy Bumbu Rujak',
+            'teh-herbal-relaksasi-malam' => 'Pastel Sayur & Ayam Beku',
+        ];
+        foreach ($legacyMap as $oldSlug => $newName) {
+            Product::where('slug', $oldSlug)->update([
+                'name' => $newName,
+                'slug' => str($newName)->slug(),
+                'category_id' => $frozen->id,
+            ]);
+        }
+
         $products = [
             [$bread, 'Roti Gandum Utuh', 35000, 'Simpan di suhu ruang maksimal 3 hari atau freezer hingga 2 minggu.', $breadImg, true, 'PO H-1 (Freshly baked, pesan hari ini dikirim besok)', [['Reguler', 0, 40, 'RGU-001']]],
-            [$bread, 'Roti Gandum Multigrain', 42000, 'Simpan di suhu ruang maksimal 3 hari atau freezer hingga 2 minggu.', $breadImg2, true, 'PO H-1 (Freshly baked, pesan hari ini dikirim besok)', [['500g', 0, 25, 'RGM-001']]],
-            [$bread, 'Roti Gandum Kismis', 38000, 'Simpan di suhu ruang maksimal 3 hari atau freezer hingga 2 minggu.', $breadImg3, true, 'PO H-1 (Freshly baked, pesan hari ini dikirim besok)', [['Reguler', 0, 20, 'RGK-001']]],
+            [$bread, 'Fudgy Brownies Panggang', 55000, 'Simpan di suhu ruang 5 hari atau kulkas hingga 2 minggu. Cokelat pekat legit.', $breadImg2, true, 'PO H-1 (Freshly baked, pesan hari ini dikirim besok)', [['Loyang 20x10', 0, 20, 'FBP-020']]],
+            [$bread, 'Roti Sisir Mentega Classic', 38000, 'Simpan di suhu ruang maksimal 3 hari. Lembut dengan aroma butter spesial.', $breadImg3, true, 'PO H-1 (Freshly baked, pesan hari ini dikirim besok)', [['Pack 6 Pcs', 0, 25, 'RSM-006']]],
             [$frozen, 'Risoles Mayo Ragout', 45000, 'Simpan beku di freezer (-18°C) tahan hingga 1 bulan. Goreng saat setengah beku dengan api sedang.', $frozenImg, true, 'PO H-1 (Dibuat fresh & dibekukan higienis)', [['Pack 10 Pcs', 0, 30, 'RMR-010']]],
             [$frozen, 'Cireng Crispy Bumbu Rujak', 30000, 'Simpan di freezer hingga 1 bulan. Goreng garing dan nikmati dengan bumbu rujak khas.', $frozenImg2, true, 'PO H-1 (Dibuat fresh & dibekukan higienis)', [['Pack 20 Pcs', 0, 35, 'CCB-020']]],
             [$frozen, 'Pastel Sayur & Ayam Beku', 48000, 'Simpan beku di freezer hingga 3 minggu. Goreng hingga renyah keemasan.', $frozenImg, true, 'PO H-1 (Dibuat fresh & dibekukan higienis)', [['Pack 10 Pcs', 0, 25, 'PSA-010']]],
-            [$drinks, 'Kopi Arabika Gayo', 68000, 'Simpan dalam wadah kedap udara, jauh dari sinar matahari langsung.', $coffeeImg, false, null, [['Biji 200g', 0, 30, 'KAG-BIJI'], ['Bubuk 200g', 2000, 30, 'KAG-BUBUK']]],
             [$drinks, 'Kopi Susu Gula Aren Fresh', 25000, 'Simpan di chiller/kulkas, nikmati dalam 3 hari. Kocok sebelum diminum.', $coffeeImg2, false, null, [['Botol 500ml', 0, 25, 'KSG-500'], ['Botol 1 Liter', 22000, 15, 'KSG-1000']]],
             [$drinks, 'Matcha Latte Artisan', 28000, 'Simpan di chiller/kulkas, nikmati dalam 3 hari. Menggunakan matcha murni pilihan.', $coffeeImg, false, null, [['Botol 500ml', 0, 20, 'MLA-500']]],
+            [$drinks, 'Kopi Arabika Gayo', 68000, 'Simpan dalam wadah kedap udara, jauh dari sinar matahari langsung.', $coffeeImg, false, null, [['Biji 200g', 0, 30, 'KAG-BIJI'], ['Bubuk 200g', 2000, 30, 'KAG-BUBUK']]],
         ];
 
         foreach ($products as [$category, $name, $price, $shelfLife, $image, $isPreorder, $preorderInfo, $variants]) {
             $slug = str($name)->slug();
-            $product = Product::firstOrCreate(
+            $product = Product::updateOrCreate(
                 ['slug' => $slug],
                 [
                     'category_id' => $category->id,
@@ -103,6 +116,6 @@ class DatabaseSeeder extends Seeder
         );
 
         Setting::set('announcement_active', '1');
-        Setting::set('announcement_text', '🍞 Roti Gandum & Frozen Food (PO) · ☕ Minuman Segar (Ready) · Diskon 10% Kode: FERSYA10');
+        Setting::set('announcement_text', '🍞 Roti & Kue serta Frozen Food (PO) · ☕ Minuman Segar (Ready) · Diskon 10% Kode: FERSYA10');
     }
 }
