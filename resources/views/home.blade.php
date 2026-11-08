@@ -30,15 +30,15 @@
 <!-- Product Categories -->
 <section class="py-10 sm:py-section-gap px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-grid-gutter">
-<a href="{{ route('katalog.index', ['kategori' => 'roti-gandum']) }}" class="group cursor-pointer reveal block">
+<a href="{{ route('katalog.index', ['kategori' => 'roti-kue']) }}" class="group cursor-pointer reveal block">
 <div class="aspect-[16/9] sm:aspect-[4/5] bg-surface-container mb-4 sm:mb-8 overflow-hidden rounded-2xl">
 <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('{{ asset('images/bread.png') }}')"></div>
 </div>
 <div class="flex items-center mb-2 sm:mb-4">
 <span class="material-symbols-outlined text-primary-container mr-3 text-2xl">bakery_dining</span>
-<h3 class="font-headline-md text-headline-md text-primary">Roti Gandum</h3>
+<h3 class="font-headline-md text-headline-md text-primary">Roti & Kue</h3>
 </div>
-<p class="text-secondary font-body-md mb-4 sm:mb-6 text-sm sm:text-base">Dibuat dengan ragi alami dan gandum utuh organik tanpa pengawet.</p>
+<p class="text-secondary font-body-md mb-4 sm:mb-6 text-sm sm:text-base">Aneka roti lembut, bolu, dan kue pilihan keluarga yang dipanggang fresh tanpa bahan pengawet.</p>
 <span class="text-primary font-semibold flex items-center group-hover:gap-2 transition-all text-sm sm:text-base">Jelajahi <span class="material-symbols-outlined ml-1 text-base sm:text-xl">arrow_forward</span></span>
 </a>
 <a href="{{ route('katalog.index', ['kategori' => 'frozen-food']) }}" class="group cursor-pointer reveal block" style="transition-delay: 100ms;">
