@@ -34,12 +34,9 @@
 <div class="aspect-[16/9] sm:aspect-[4/5] bg-surface-container mb-4 sm:mb-8 overflow-hidden rounded-2xl">
 <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('{{ asset('images/bread.png') }}')"></div>
 </div>
-<div class="flex items-center justify-between mb-2 sm:mb-4">
-<div class="flex items-center">
+<div class="flex items-center mb-2 sm:mb-4">
 <span class="material-symbols-outlined text-primary-container mr-3 text-2xl">bakery_dining</span>
 <h3 class="font-headline-md text-headline-md text-primary">Roti Gandum</h3>
-</div>
-<span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">Pre-Order</span>
 </div>
 <p class="text-secondary font-body-md mb-4 sm:mb-6 text-sm sm:text-base">Dibuat dengan ragi alami dan gandum utuh organik tanpa pengawet.</p>
 <span class="text-primary font-semibold flex items-center group-hover:gap-2 transition-all text-sm sm:text-base">Jelajahi <span class="material-symbols-outlined ml-1 text-base sm:text-xl">arrow_forward</span></span>
@@ -48,12 +45,9 @@
 <div class="aspect-[16/9] sm:aspect-[4/5] bg-surface-container mb-4 sm:mb-8 overflow-hidden rounded-2xl">
 <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('{{ asset('images/tea.png') }}')"></div>
 </div>
-<div class="flex items-center justify-between mb-2 sm:mb-4">
-<div class="flex items-center">
+<div class="flex items-center mb-2 sm:mb-4">
 <span class="material-symbols-outlined text-primary-container mr-3 text-2xl">ac_unit</span>
 <h3 class="font-headline-md text-headline-md text-primary">Frozen Food</h3>
-</div>
-<span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">Pre-Order</span>
 </div>
 <p class="text-secondary font-body-md mb-4 sm:mb-6 text-sm sm:text-base">Lauk & camilan beku higienis keluarga, praktis digoreng dan disajikan kapan saja.</p>
 <span class="text-primary font-semibold flex items-center group-hover:gap-2 transition-all text-sm sm:text-base">Jelajahi <span class="material-symbols-outlined ml-1 text-base sm:text-xl">arrow_forward</span></span>
@@ -62,12 +56,9 @@
 <div class="aspect-[16/9] sm:aspect-[4/5] bg-surface-container mb-4 sm:mb-8 overflow-hidden rounded-2xl">
 <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style="background-image: url('{{ asset('images/coffee.png') }}')"></div>
 </div>
-<div class="flex items-center justify-between mb-2 sm:mb-4">
-<div class="flex items-center">
+<div class="flex items-center mb-2 sm:mb-4">
 <span class="material-symbols-outlined text-primary-container mr-3 text-2xl">local_cafe</span>
 <h3 class="font-headline-md text-headline-md text-primary">Minuman</h3>
-</div>
-<span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">Ready Stock</span>
 </div>
 <p class="text-secondary font-body-md mb-4 sm:mb-6 text-sm sm:text-base">Kopi susu pilihan, matcha artisan, dan aneka minuman segar siap minum.</p>
 <span class="text-primary font-semibold flex items-center group-hover:gap-2 transition-all text-sm sm:text-base">Jelajahi <span class="material-symbols-outlined ml-1 text-base sm:text-xl">arrow_forward</span></span>
@@ -91,21 +82,16 @@
 <div>
 <div class="relative aspect-[4/3] mb-4 overflow-hidden rounded-xl bg-surface-container">
 <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ asset($product->primaryImage()?->image_path ?? 'images/bread.png') }}')"></div>
-<div class="absolute top-2.5 left-2.5">
-@if ($product->is_preorder)
-<span class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-50/95 text-amber-800 border border-amber-200 shadow-xs backdrop-blur-xs">
-<span class="material-symbols-outlined text-[12px]">schedule</span> PO
-</span>
-@else
-<span class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-50/95 text-emerald-800 border border-emerald-200 shadow-xs backdrop-blur-xs">
-<span class="material-symbols-outlined text-[12px]">bolt</span> Ready
-</span>
-@endif
-</div>
 </div>
 <div class="text-center">
 <h4 class="font-headline-md text-base text-primary mb-1 line-clamp-1">{{ $product->name }}</h4>
-<p class="text-primary font-bold text-sm mb-4">Rp {{ number_format($product->base_price, 0, ',', '.') }}</p>
+<div class="flex items-center justify-center gap-1.5 text-sm mb-4">
+<span class="text-primary font-bold">Rp {{ number_format($product->base_price, 0, ',', '.') }}</span>
+@if ($product->is_preorder)
+<span class="text-stone-300">·</span>
+<span class="text-xs text-stone-500 font-normal">Pre-order</span>
+@endif
+</div>
 </div>
 </div>
 <span class="block w-full border border-primary text-primary py-2.5 rounded-lg text-sm text-center font-semibold hover:bg-primary hover:text-on-primary transition-all">Lihat Produk</span>
