@@ -12,7 +12,7 @@
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>{{ route('katalog.index', ['kategori' => 'roti-gandum']) }}</loc>
+        <loc>{{ route('katalog.index', ['kategori' => 'roti-kue']) }}</loc>
         <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
