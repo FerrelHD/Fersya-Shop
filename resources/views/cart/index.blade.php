@@ -13,7 +13,18 @@
 <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ $item['variant']->product->primaryImage()?->image_path }}')"></div>
 </div>
 <div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-1 flex-wrap">
 <h3 class="font-headline-md text-body-lg text-primary truncate">{{ $item['variant']->product->name }}</h3>
+@if ($item['variant']->product->is_preorder)
+<span class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
+PO H-1
+</span>
+@else
+<span class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+Ready
+</span>
+@endif
+</div>
 <p class="text-on-surface-variant font-body-md text-sm">{{ $item['variant']->name }}</p>
 <p class="text-primary font-bold text-sm">Rp {{ number_format($item['variant']->price(), 0, ',', '.') }}</p>
 </div>
@@ -84,8 +95,33 @@
 </div>
 </div>
 
-<div class="pt-4 flex justify-end">
-<a href="{{ route('checkout.index') }}" class="w-full sm:w-auto text-center bg-primary text-on-primary px-10 py-5 rounded-xl font-bold shadow-md hover:bg-opacity-90 transition-all">Lanjut ke Checkout</a>
+@php
+$cartWaLines = [];
+$cartWaLines[] = "Halo Admin Fersya Shop, saya ingin memesan dari keranjang belanja:";
+$cartWaLines[] = "";
+$cartWaLines[] = "🛒 DAFTAR ITEM:";
+$itemIndex = 1;
+foreach ($items as $cartItem) {
+    $poTag = $cartItem['variant']->product->is_preorder ? '[⏳ PO H-1]' : '[⚡ READY]';
+    $cartWaLines[] = "{$itemIndex}. {$cartItem['variant']->product->name} ({$cartItem['variant']->name}) x{$cartItem['quantity']} {$poTag} - Rp " . number_format($cartItem['subtotal'], 0, ',', '.');
+    $itemIndex++;
+}
+$cartWaLines[] = "";
+$cartWaLines[] = "💰 Total Belanja: Rp " . number_format($grandTotal, 0, ',', '.');
+if ($coupon) {
+    $cartWaLines[] = "🏷️ Kupon Digunakan: {$coupon->code} (-Rp " . number_format($discount, 0, ',', '.') . ")";
+}
+$cartWaLines[] = "";
+$cartWaLines[] = "Mohon info ketersediaan slot pengiriman dan nomor rekening/QRIS ya Bu. Terima kasih! 🙏";
+$cartWaUrl = "https://wa.me/6281321686115?text=" . rawurlencode(implode("\n", $cartWaLines));
+@endphp
+
+<div class="pt-4 flex flex-col sm:flex-row justify-end items-center gap-4">
+<a href="{{ $cartWaUrl }}" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto text-center bg-[#25D366] text-white px-8 py-4 rounded-xl font-bold shadow-md hover:bg-opacity-90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-xl">chat</span>
+<span>Pesan Cepat via WhatsApp</span>
+</a>
+<a href="{{ route('checkout.index') }}" class="w-full sm:w-auto text-center bg-primary text-on-primary px-8 py-4 rounded-xl font-bold shadow-md hover:bg-opacity-90 transition-all">Lanjut Isi Alamat (Checkout)</a>
 </div>
 </div>
 @endif
